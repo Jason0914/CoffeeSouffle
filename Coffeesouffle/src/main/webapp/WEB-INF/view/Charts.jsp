@@ -52,7 +52,7 @@
         <div class="dashboard-container">
             <!-- 銷售排行圖表 -->
             <div class="chart-box">
-                <h2>銷售排名分析</h2>
+                <h2>銷售排名</h2>
                 <canvas id="salesRankingChart"></canvas>
             </div>
 
