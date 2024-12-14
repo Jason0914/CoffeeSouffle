@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/Charts.css">
+    <link rel="stylesheet" href="/css/Charts.css">
 
     <!-- Icon -->
     <link rel="icon" href="${pageContext.request.contextPath}/img/Logo/cooffee.ico" type="image/">
     
-    <title>財務分析 - Coffee Soufflé</title>
+    <title>Coffee Soufflé</title>
 </head>
 <body>
     <!-- Header -->

@@ -1,6 +1,10 @@
-/* 字體引入 */
+/*以下是三個不同風格的推薦字體，可以用來替換目前的字體，讓你的設計更具吸引力或個性化：
+
+1. Noto Sans TC（無襯線，適合清晰閱讀）*/
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
+/*2. Zhi Mang Xing（手寫風，適合標題）*/
 @import url('https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap');
+/* 3. Dancing Script（優雅，適合描述性文字） */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600&display=swap');
 /* 變數定義 */
 :root {

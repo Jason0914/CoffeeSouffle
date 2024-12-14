@@ -153,52 +153,7 @@
 <!--         迴圈結束 -->
     </div>
 </div>
-<!-- <section> -->
-<!--     <div class="container"> -->
-<!--         桌號選擇 -->
-<!--         <div class="d-flex align-items-center mb-4"> -->
-<!--             <label for="tableNumber" class="me-3 fw-bold">請選擇桌號：</label> -->
-<!--             <select id="tableNumber" name="tableNumber" class="form-select w-25 me-auto" required> -->
-<!--                 <option selected disabled>請選擇桌號</option> -->
-<!--                 <option value="1">1號桌</option> -->
-<!--                 <option value="2">2號桌</option> -->
-<!--                 <option value="3">3號桌</option> -->
-<!--                 <option value="4">4號桌</option> -->
-<!--                 <option value="5">5號桌</option> -->
-<!--             </select> -->
-<!--         </div> -->
 
-<!--         購物車表單 -->
-<%--         <form id="createOrder" action="${pageContext.request.contextPath}/order_backend/" method="post" enctype="multipart/form-data"> --%>
-<!--             <fieldset> -->
-<!--                 HttpMethod 隱藏欄位 -->
-<%--                 <input name="_method" type="hidden" value="${_method}" /> --%>
-
-<!--                 購物車項目 -->
-<!--                 <table class="table w-100 cart-table"> -->
-<!--                     <thead> -->
-<!--                         <tr> -->
-<!--                             <th class="text-center">餐點名稱</th> -->
-<!--                             <th class="text-center">單價</th> -->
-<!--                             <th class="text-center">數量</th> -->
-<!--                             <th class="text-center">小計</th> -->
-<!--                             <th class="text-center"></th> -->
-<!--                         </tr> -->
-<!--                     </thead> -->
-<!--                     <tbody id="cart-items"> -->
-<!--                         購物車項目將由 JavaScript 動態生成 -->
-<!--                     </tbody> -->
-<!--                 </table> -->
-
-<!--                 總金額 -->
-<!--                 <div class="d-flex justify-content-between align-items-center mt-4"> -->
-<!--                     <h2 id="total-amount" class="fw-bold">總金額：$0</h2> -->
-<!--                     <button type="submit" class="btn btn-outline-success" id="submit-order">送 出</button> -->
-<!--                 </div> -->
-<!--             </fieldset> -->
-<!--         </form> -->
-<!--     </div> -->
-<!-- </section> -->
 </main>
 	   <!-- footer 區域 頁尾 -->
    <footer>
