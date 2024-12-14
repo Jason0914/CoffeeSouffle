@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="/css/member_backend.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="icon" href="/img/Logo/cooffee.ico" type="image/">
-    <title>員工管理後台 - Coffee Soufflé</title>
+    <title>Coffee Soufflé</title>
 </head>
 
 <body>

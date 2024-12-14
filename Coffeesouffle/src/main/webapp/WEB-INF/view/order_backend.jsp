@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=3.0">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/order_backend.css">
     <!-- animate.style -->
@@ -45,7 +45,7 @@
     <div class="container-xxl p-0">
         <a class="navbar-brand d-flex align-items-center" href="./index">
             <img src="/img/Logo/coffee2.png" class="Logo" height="90" alt="">
-            <h1 class="m-0 ms-3" id="h1">後臺</h1>
+            <h1 class="m-0 ms-3" id="h1">訂單管理後臺</h1>
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
@@ -56,9 +56,9 @@
         <nav class="collapse navbar-collapse" id="navbarMenu">
             <div class="header-buttons">
                	<a class="header-btn" href="/index">首頁</a>
-                   <a href="/Charts" class="header-btn">財務狀況統整</a>
-                <a class="header-btn" href="/order_backend">訂餐</a>
-                <a class="header-btn" href="/member_backend">成員</a>
+                   <a href="/Charts" class="header-btn">財務狀況</a>
+                <a class="header-btn" href="/order_backend">訂單管理</a>
+                <a class="header-btn" href="/member_backend">員工管理</a>
                 <a class="header-btn" href="/logout">登出</a>
             </div>
         </nav>

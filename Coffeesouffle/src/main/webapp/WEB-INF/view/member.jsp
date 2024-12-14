@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
 
-                                <p><a href="#" id="toForget">忘記密碼？</a></p>
+                              
                                 <button type="button" id="loginButton" class="btn btn-primary d-flex mx-auto">登入</button>
                             </fieldset>
                         </form>
