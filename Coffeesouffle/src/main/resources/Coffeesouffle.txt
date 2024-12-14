@@ -1,0 +1,116 @@
+-- 判斷資料庫是否存在，存在的話先刪除
+-- 建立 coffeesouffle 資料庫
+-- 使用 coffeesouffle 資料庫
+DROP DATABASE IF EXISTS coffeesouffle;
+CREATE DATABASE coffeesouffle;
+USE coffeesouffle;
+
+-- 刪除已存在的 member 表單
+-- 建立 member 表單
+DROP TABLE IF EXISTS member;
+CREATE TABLE member (
+    member_id INT AUTO_INCREMENT PRIMARY KEY,
+    account VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    salt VARCHAR(255) NOT NULL DEFAULT '',
+    name VARCHAR(50) NOT NULL,
+    gender VARCHAR(10),
+    birthday DATE,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    phone VARCHAR(20),
+    is_member INT(10) CHECK (is_member IN (1, 2)) DEFAULT 2
+    -- is_member 權限 (1：管理者, 2：一般會員)
+);
+
+-- 刪除已存在的 menu 表單
+-- 建立 menu 表單
+DROP TABLE IF EXISTS menu;
+CREATE TABLE menu (
+    menu_id INT AUTO_INCREMENT PRIMARY KEY,
+    meal_name VARCHAR(50) UNIQUE NOT NULL,
+    meal_type VARCHAR(30),
+    description VARCHAR(250),
+    meal_price INT,
+    meal_image VARCHAR(50) DEFAULT NULL
+);
+
+-- 刪除已存在的 news 表單
+-- 建立 news 表單
+DROP TABLE IF EXISTS news;
+CREATE TABLE news (
+    news_id INT AUTO_INCREMENT PRIMARY KEY,
+    news_title VARCHAR(50) UNIQUE NOT NULL,
+    content VARCHAR(250),
+    news_image VARCHAR(50) DEFAULT NULL,
+    start_date DATE,
+    end_date DATE,
+    combo_name VARCHAR(50),
+    combo_price INT
+);
+
+-- 刪除已存在的 order 表單
+-- 建立 orders 表單orders
+CREATE TABLE orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    table_number INT,
+    total_price INT DEFAULT 0,
+    order_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+-- 刪除已存在的 order_items 表單
+-- 建立 order_items 表單
+CREATE TABLE order_items (
+    order_item_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    order_name VARCHAR(50) NOT NULL,
+    quantity INT,
+    price INT,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id)
+);
+
+INSERT INTO member (account, password, salt, name, gender, birthday, email, phone, is_member) VALUES 
+('james', 'a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6', 'p5o4n3m2l1k0j9i8h7g6f5e4d3c2b1a', 'James', '男生', '1988-02-15', 'james1988@gmail.com', '0912121212', 1),
+('susan', 'f4e5d6c7b8a9g0h1i2j3k4l5m6n7o8p9', 'o9n8m7l6k5j4i3h2g1f0e9d8c7b6a5f', 'Susan', '女生', '1990-03-20', 'susan1990@gmail.com', '0923232323', 1),
+('peter', 'e6d7c8b9a0f1g2h3i4j5k6l7m8n9o0p1', 'p1o0n9m8l7k6j5i4h3g2f1e0d9c8b7a6e', 'Peter', '男生', '1992-05-10', 'peter1992@gmail.com', '0934343434', 2),
+('linda', 'd8c9b0a1f2g3h4i5j6k7l8m9n0o1p2q3', 'q3p2o1n0m9l8k7j6i5h4g3f2e1d0c9b8a', 'Linda', '女生', '1985-07-30', 'linda1985@gmail.com', '0945454545', 2),
+('kevin', 'c9b0a1f2g3h4i5j6k7l8m9n0o1p2q3r4', 'r4q3p2o1n0m9l8k7j6i5h4g3f2e1d0c9b', 'Kevin', '男生', '1978-12-01', 'kevin1978@gmail.com', '0956565656', 2),
+('emily', 'b0a1f2g3h4i5j6k7l8m9n0o1p2q3r4s5', 's5r4q3p2o1n0m9l8k7j6i5h4g3f2e1d0c9', 'Emily', '女生', '1995-11-15', 'emily1995@gmail.com', '0967676767', 2),
+('john', 'a1f2g3h4i5j6k7l8m9n0o1p2q3r4s5t6', 't6s5r4q3p2o1n0m9l8k7j6i5h4g3f2e1d0', 'John', '男生', '1980-04-25', 'john1980@gmail.com', '0978787878', 2),
+('alice', 'f2g3h4i5j6k7l8m9n0o1p2q3r4s5t6u7', 'u7t6s5r4q3p2o1n0m9l8k7j6i5h4g3f2e1d', 'Alice', '女生', '1998-09-12', 'alice1998@gmail.com', '0989898989', 2),
+('daniel', 'g3h4i5j6k7l8m9n0o1p2q3r4s5t6u7v8', 'v8u7t6s5r4q3p2o1n0m9l8k7j6i5h4g3f2e1', 'Daniel', '男生', '1994-01-01', 'daniel1994@gmail.com', '0990909090', 2);
+
+
+
+INSERT INTO menu (meal_name, meal_type, description, meal_price, meal_image) VALUES
+('柑橘舒芙蕾', 'dessert', '嚴選金黃飽滿的茂谷柑，搭配馬斯卡彭鮮奶油、卡士達、優格冰淇淋，淋上蜂蜜達到完美的平衡', 100, 'Citrus Soufflé.jpg'),
+('草莓舒芙蕾', 'dessert', '使用新鮮草莓切片，覆蓋在舒芙蕾與薄荷奶油上，並佐以酸甜莓果醬，營造春日裡的甜蜜滋味。', 120, 'Strawberry soufflé.jpg'),
+('水果舒芙蕾', 'dessert', '嚴選新鮮草莓、香蕉與藍莓，搭配輕盈的舒芙蕾，佐以濃郁奶油與糖霜，清爽與甜美的結合帶來初戀般的滋味。', 130, 'Fruits soufflé.jpg'),
+('芒果舒芙蕾', 'dessert', '採用當季金黃熟芒果，鋪滿在鬆軟的舒芙蕾上，搭配濃滑的冰淇淋與鮮奶油，為味蕾注入滿滿的熱帶風情。', 140, 'Mango soufflé.jpg'),
+('抹茶舒芙蕾', 'dessert', '選用香濃日式抹茶醬覆蓋在舒芙蕾上，搭配糯米丸子與蜜柑餡料，口感層次豐富，讓人彷彿置身京都茶園。', 150, 'Matcha soufflé.jpg'),
+('堅果舒芙蕾', 'dessert', '搭配手工焦糖堅果與濃郁奶油冰淇淋，輕盈的舒芙蕾透著溫暖的焦糖香氣，每一口都是秋日的幸福感。', 100, 'Nut soufflé.jpg'),
+('原味舒芙蕾', 'dessert', '經典的原味舒芙蕾，撒上細緻糖粉，搭配濃郁的鮮奶油，呈現最純粹的口感，帶來無與倫比的柔軟與香甜。', 80, 'Original soufflé.jpg'),
+('水果氣泡飲', 'drinks', '融合葡萄、檸檬與薄荷葉，搭配沁涼氣泡水，每一口都感受水果的自然清香與酸甜。', 50, 'Fruit juice.jpg'),
+('哈密瓜蘇打', 'drinks', '晶瑩的綠色氣泡中，藏著濃郁的哈密瓜風味，搭配一球香草冰淇淋，帶來夏日的清涼甜蜜。', 70, 'Melon soda.jpg'),
+('草莓牛奶', 'drinks', '新鮮草莓果泥與濃醇牛奶的完美結合，入口即是甜美的幸福，宛如春天的滋味。', 60, 'strawberry milk.jpg'),
+('卡布奇諾', 'drinks', '絲滑奶泡覆蓋濃郁咖啡，入口綿密香醇，每一口都是咖啡與牛奶的絕佳平衡。', 80, '卡布奇諾.jpg'),
+('冰紅茶', 'drinks', '採用上等茶葉，冷萃出自然的香氣，搭配冰塊清涼降溫，是午後的最佳選擇。', 40, '冰紅茶.jpg'),
+('咖啡拿鐵', 'drinks', '濃縮咖啡與順滑牛奶的結合，帶來醇厚與柔和的雙重口感，最適合舒緩忙碌的日子。', 70, '咖啡拿鐵.jpg'),
+('美式冰咖啡', 'drinks', '純粹的咖啡風味與冰塊交融，清爽不膩口，是咖啡愛好者的經典選擇。', 50, '美式冰咖啡.jpg'),
+('焦糖瑪奇朵', 'drinks', '濃郁奶香覆蓋焦糖醬，濕潤奶泡與咖啡的完美融合，甜而不膩，為心情增添一抹溫暖。', 80, '焦糖瑪奇朵.jpg'),
+('義式摩卡', 'drinks', '濃縮咖啡與巧克力的結合，搭配細膩奶泡，濃郁又絲滑，讓人一口愛上經典的義式風情。', 80, '義式摩卡.jpg');
+
+
+INSERT INTO news (news_title, content, news_image, start_date, end_date, combo_name, combo_price) VALUES
+('情人節限定', '凡情侶於情人節當天,拍照打卡即可打77折！', 'valent.png', '2024-02-14', '2024-03-14', '情人節套餐', 300),
+('聖誕節吃火雞', '聖誕節消費聖誕大餐,即送半隻烤火雞！', 'christmas.png', '2024-12-25', '2024-12-31', '聖誕套餐', 500),
+('壽星最優惠', '出示證件，當月壽星送生日蛋糕一份！', 'birth.png', '2024-01-01', '2024-12-31', '生日快樂', 0);
+
+
+
+-- 查詢orders
+-- SELECT orders.order_id, table_number, order_name, quantity, price, order_time 
+-- FROM orders
+-- JOIN order_items ON orders.order_id = order_items.order_id
+-- WHERE orders.order_id = 1;

@@ -1,0 +1,162 @@
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true" %>
+<!-- Tomcat 10.x JSTL -->
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<!-- Spring Form 表單標籤 -->
+<%@ taglib prefix="sp" uri="http://www.springframework.org/tags/form" %>
+
+<!-- 統計資料 -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    
+    function drawChart() {
+    	drawTopFiveChart();
+    	drawBottomFiveChart();
+    	drawShiftSalesChart();
+    }
+    // 畫出銷售最好前五名
+   function drawTopFiveChart() {
+    var orderItemsList = [
+        <c:forEach var="item" items="${orderItemList}" varStatus="loop">
+        {   
+            orderName: '${item.orderName}', 
+            quantity: ${item.quantity}
+        },
+        </c:forEach>
+    ];
+    
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', '產品名稱');
+    data.addColumn('number', '數量');
+
+    // 只取前五名
+    orderItemsList.slice(0, 5).forEach(item => {
+        data.addRow([item.orderName, item.quantity]);
+    });
+
+    var options = {
+        title: '最佳的前五名產品',
+        backgroundColor: 'rgb(245, 245, 245)',
+        fontSize: 20,
+        fontName: 'cat',
+        is3D: true, // 使用 3D 圖表
+        legend: { position: 'right', textStyle: { fontSize: 20 } } // 圖例位置與樣式
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('top_five_chart'));
+    chart.draw(data, options);
+}
+
+    
+    // 畫出銷售最差後五名
+  function drawBottomFiveChart() {
+    var orderItemsList = [
+        <c:forEach var="item" items="${orderItemList}" varStatus="loop">
+        {   
+            orderName: '${item.orderName}', 
+            quantity: ${item.quantity}
+        },
+        </c:forEach>
+    ];
+
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', '產品名稱');
+    data.addColumn('number', '數量');
+
+    // 只取後五名
+    orderItemsList.slice(-5).forEach(item => {
+        data.addRow([item.orderName, item.quantity]);
+    });
+
+    var options = {
+        title: '最差的後五名產品',
+        backgroundColor: 'rgb(245, 245, 245)',
+        fontSize: 20,
+        fontName: 'cat',
+        is3D: true, // 使用 3D 圖表
+        legend: { position: 'right', textStyle: { fontSize: 20 } } // 圖例位置與樣式
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('bottom_five_chart'));
+    chart.draw(data, options);
+}
+
+  
+    // 畫出早晚班圖
+    function drawShiftSalesChart() {
+        // 從 JSP 頁面獲取數據並轉換為 JavaScript 數組
+        var order = [
+            <c:forEach var="order" items="${orderList}">
+                {
+                    name: '${order.orderName}',
+                    time: new Date('${order.orderTime}'),
+                    price: ${order.totalPrice}
+                },
+            </c:forEach>
+        ];
+
+        
+
+        // 計算兩個時段的營業額加總
+//         var shiftSales = calculateShiftSales(order);
+
+//         var data = google.visualization.arrayToDataTable([
+//             ['時段', '總營業額', { role: 'style' }],
+//             ['早班', shiftSales.morningShift, 'color: #34A853'],
+//             ['晚班', shiftSales.eveningShift, 'color: #EA4335']
+//         ]);
+
+//         var options = {
+//             title: '各時段營業額',
+//             is3D: true,
+//             backgroundColor: '#FFFAE6',
+//             fontSize: 28,
+//             fontName: 'cat',
+//             legend: { position: 'bottom' },
+            
+//         };
+     	// PieChart, BarChart, ColumnChart, LineChart
+        var chart = new google.visualization.PieChart(document.getElementById('shift_sales_chart'));
+        chart.draw(data, options);
+    }
+
+    function calculateShiftSales(orders) {
+        var morningShift = 0;
+        var eveningShift = 0;
+
+        orders.forEach(order => {
+            var hours = order.time.getHours();
+            if (hours >= 10 && hours <= 16) {
+                morningShift += order.price;
+            } else if (hours >= 17 && hours <= 22) {
+                eveningShift += order.price;
+            }
+        });
+
+        return {
+            morningShift: morningShift,
+            eveningShift: eveningShift
+        };
+    }
+
+</script>
+
+
+<!-- 	<div class="col-12 col-md-6"> -->
+<!-- 	    <div id="top_five_chart" style="width: 700px; height: 500px; "></div> -->
+<!-- 	</div> -->
+	
+<!-- 	<div class="col-12 col-md-6"> -->
+<!-- 	    <div id="bottom_five_chart" style="width: 700px; height: 500px; "></div> -->
+<!-- 	</div> -->
+	
+<!-- 	<div class="col-12 col-md-6"> -->
+<!-- 	    <div id="shift_sales_chart" style="width: 700px; height: 500px; "></div> -->
+<!-- 	</div> -->
+	
+	

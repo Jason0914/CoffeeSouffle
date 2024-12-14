@@ -1,0 +1,108 @@
+@charset "UTF-8";
+/* 全局樣式設置 */
+body {
+    font-family: 'Noto Sans TC', sans-serif; /* 使用無襯線字體 */
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* 購物車表格樣式 */
+.cart-table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.cart-table th, .cart-table td {
+    padding: 15px;
+    text-align: center;
+    font-size: 1.2rem;
+    border: 1px solid #ddd;
+}
+
+.cart-table th {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+}
+
+.cart-table td {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* 總計與結帳按鈕 */
+.cart-total {
+    text-align: right;
+    margin: 20px auto;
+    padding-right: 5%;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.checkout-button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+
+.checkout-button:hover {
+    background-color: #218838;
+}
+
+/* 響應式樣式 */
+@media (min-width: 1920px) {
+    body {
+        font-size: 18px; /* 提高字體大小適配大屏 */
+    }
+
+    .cart-table th, .cart-table td {
+        font-size: 1.5rem; /* 調整表格文字大小 */
+        padding: 20px; /* 增加內邊距 */
+    }
+
+    .checkout-button {
+        font-size: 1.5rem; /* 增大按鈕文字 */
+        padding: 15px 30px; /* 調整按鈕大小 */
+    }
+}
+
+@media (max-width: 768px) {
+    .cart-table {
+        width: 100%; /* 表格寬度適應手機屏幕 */
+    }
+
+    .cart-table th, .cart-table td {
+        font-size: 0.9rem; /* 縮小字體大小 */
+        padding: 10px; /* 減少內邊距 */
+    }
+
+    .cart-table th {
+        font-size: 1rem; /* 適當保留標題突出效果 */
+    }
+
+    .cart-total {
+        font-size: 1.2rem; /* 縮小總計文字大小 */
+        text-align: center; /* 居中對齊 */
+    }
+
+    .checkout-button {
+        font-size: 1rem; /* 縮小按鈕文字大小 */
+        padding: 10px 15px; /* 減少按鈕大小 */
+    }
+}

@@ -1,0 +1,504 @@
+html, body {
+    height: 100%; /* 確保頁面高度填滿整個視窗 */
+    margin: 0; /* 清除預設外邊距 */
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1; /* 讓主要內容區域自動填滿剩餘空間 */
+}
+
+footer {
+    margin-top: auto; /* 自動推動 Footer 到頁面底部 */
+    background-color: var(--c-sub2-10); /* 背景色 */
+    text-align: center;
+    padding: 20px 0; /* 內邊距 */
+}
+#sec2 {
+    margin-bottom: 0;
+    padding-bottom: 20px; /* 適當的內邊距 */
+}
+
+/* 手機版設計 */
+@media (max-width: 768px) {
+    /* 縮小產品行 */
+    .product {
+        flex-direction: row; /* 保持橫向排列 */
+        align-items: center;
+        padding: 10px; /* 減少內邊距 */
+        flex: 1 1 calc(100% - 20px); /* 每行一個產品 */
+    }
+
+    /* 縮小產品圖片 */
+    .product-image img {
+        width: 70px; /* 調整圖片寬度 */
+        height: 70px;
+        border-radius: 10px;
+    }
+
+    /* 優化文字區域 */
+    .product-info {
+        padding: 0 10px;
+    }
+
+    /* 調整標題大小 */
+    .product-info h2 {
+        font-size: 1.2rem; /* 縮小標題字體 */
+        margin-bottom: 5px; /* 減少標題間距 */
+    }
+
+    /* 調整描述文字大小 */
+    .product-info p {
+        font-size: 0.9rem; /* 縮小描述文字 */
+        line-height: 1.4;
+        margin-bottom: 5px;
+    }
+
+    /* 縮小按鈕 */
+    .product-info a {
+        font-size: 0.8rem; /* 調整按鈕文字大小 */
+        padding: 5px 10px; /* 縮小內邊距 */
+    }
+}
+
+
+
+
+/* 通用樣式：調整 LOGO 的大小和間距 */
+.footer-logo-img-Line,
+.footer-logo-img-FB,
+.footer-logo-img-IG {
+    width: 50px; /* 設定 LOGO 的寬度 */
+    height: auto; /* 自動調整高度，保持比例 */
+    margin: 0 10px; /* 為每個 LOGO 添加左右間距 */
+    display: inline-block; /* 確保 LOGO 水平排列 */
+    transition: transform 0.3s ease-in-out; /* 添加動畫效果 */
+}
+
+/* 滑鼠懸停效果 */
+.footer-logo-img-Line:hover,
+.footer-logo-img-FB:hover,
+.footer-logo-img-IG:hover {
+    transform: scale(1.1); /* 懸停時稍微放大 */
+}
+
+/* 手機版樣式 */
+@media (max-width: 768px) {
+    .footer-logo-img-Line,
+    .footer-logo-img-FB,
+    .footer-logo-img-IG {
+        width: 40px; /* 手機版縮小 LOGO 寬度 */
+        margin: 0 5px; /* 減少 LOGO 之間的間距 */
+    }
+}
+
+
+
+
+
+
+
+
+
+/* 更緊湊的間距設置 */
+.product-row {
+    gap: 10px; /* 減少產品之間的間距 */
+}
+
+
+
+
+
+/* section2 區域 Menu */
+#sec2 {
+    font-size: 34px;
+    padding: 100px 0px;
+}
+/* 調整按鈕基礎樣式 */
+.list-group-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #fff; 
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 24px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+/* 圖標樣式 */
+.list-group-item img {
+    width: 40px;
+    height: 40px;
+}
+
+/* 滑鼠懸停效果 */
+.list-group-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 展開狀態的樣式 */
+.list-group-item.expanded {
+    background-color: #ffe7b3; /* 展開時的背景色 */
+    padding: 20px 40px;
+}
+
+/* 隱藏詳細內容的樣式 */
+.item-details {
+    display: none;
+    padding-top: 10px;
+    font-size: 18px;
+    color: #555;
+}
+
+/* 顯示詳細內容 */
+.list-group-item.expanded .item-details {
+    display: block;
+}
+
+/* 外層容器樣式 */
+.meal-row {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+/* 滑鼠懸停時效果 */
+.meal-row:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 圖片樣式 */
+.meal-image img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* 中間資訊樣式 */
+.meal-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.meal-info h2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.meal-info p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+/* 加入購物車按鈕樣式 */
+.meal-actions button {
+    font-size: 14px;
+    padding: 8px 12px;
+    white-space: nowrap;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .meal-row {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .meal-image img {
+        margin: 0 auto 10px auto;
+    }
+
+    .meal-actions {
+        text-align: center;
+        margin-top: 10px;
+    }
+}
+
+
+
+.container-xl {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+
+#tableNumber {
+    font-size: 1.1rem;
+    padding: 10px;
+}
+
+.cart-table th, .cart-table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+#total-amount {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.btn-outline-success {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+}
+
+
+
+
+
+
+
+.list-group-item,
+.change-quantity {
+    font-size: 24px;
+    outline: 1px solid rgba(0, 0, 0, .125);
+
+}
+
+#sec2 .meal-type .list-group-item img {
+    width: 30px;
+    height: 30px;
+}
+
+.meal-type,
+.list-group-item {
+    border-radius: 25px;
+}
+
+#meal-container h2 {
+    font-size: 30px;
+}
+
+#meal-container p {
+    text-indent: 0;
+    font-size: 24px;
+}
+
+.meal-card {
+    border-radius: 25px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.meal-card button {
+    border-radius: 25px;
+    margin-bottom: 10px;
+    font-size: 24px;
+    width: 75%;
+    margin: 0px auto;
+}
+
+.list-group-item:hover {
+    color: #fff;
+    background-color: var(--c-sub3-05);
+    border-color: var(--c-sub3-05);
+}
+
+.list-group-item.active {
+    color: #fff;
+    background-color: var(--c-sub3-08);
+    border-color: var(--c-sub3-08);
+}
+
+.meal-card img {
+    padding: 20px;
+    margin: auto;
+}
+
+@media (min-width: 800px) {
+
+    #sec2 .meal-type .list-group-item img {
+        width: 50px;
+        height: 50px;
+    }
+
+}
+
+/* 頁面按鈕 */
+.simple-pagination ul {
+    list-style: none;
+    text-align: center;
+    margin-bottom: 50px;
+    display: flex;
+}
+
+.page-link {
+    color: var(--c-base-10);
+    background-color: #fff;
+}
+
+.simple-pagination .current {
+    color: rgb(0,0,0);
+    background-color: var(--c-base-10);
+    border: 1px solid #dee2e6;
+    text-align: center;
+    padding: 6px 12px;
+    margin-top: 0px;
+    position: relative;
+    display: block;
+}
+
+.simple-pagination li a {
+    font-weight: bold;
+}
+
+.prev {
+    border-radius: 15px 0 0 15px;
+}
+
+.next {
+    border-radius: 0 15px 15px 0;
+}
+
+.pagination {
+    width: 100%;
+    justify-content: center;
+}
+
+
+.form-select {
+    font-size: 2rem;
+    margin: 20px 30px;
+    border-radius: 15px;
+    min-width: 250px;
+}
+
+
+@media(max-width: 767px) {
+    .simple-pagination li a {
+        font-size: 18px;
+        padding: 0px 6px;
+    }
+
+    .simple-pagination .current {
+        font-size: 18px;
+        padding: 0px 6px;
+    }
+
+}
+
+#pagination-container {
+    height: 55px;
+}
+
+#pagination-container ul {
+    padding: 0px;
+    align-content: center;
+}
+
+/* 頁面按鈕結束 */
+
+
+
+#sec2 .input-group {
+    min-width: 100px;
+    max-width: 150px;
+    white-space: nowrap;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+}
+
+/* 數量input */
+#sec2 .quantity-input {
+    background-color: #fff;
+    margin-top: 5px;
+    max-height: 46px;
+    border-radius: 3px;
+    font-size: 30px;
+}
+
+.table {
+    max-width: 95%;
+    margin: auto;
+}
+
+#total-amount {
+    margin: 20px 0px;
+    text-align: center;
+}
+
+.submitButton {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-outline-success {
+    font-size: 24px;
+
+    border: 2px solid rgb(25, 135, 84);
+    border-radius: 15px;
+
+}
+
+.remove-item {
+    font-size: 24px;
+    border: 2px solid rgb(220, 53, 69);
+    border-radius: 15px;
+}
+
+/* 寬度低於600 購物車分兩欄 */
+@media (max-width: 600px) {
+
+    .cart-table td,
+    .cart-table th {
+        display: block;
+        width: 100%;
+    }
+
+    .cart-table td:nth-child(2),
+    .cart-table th:nth-child(2) {
+        margin-top: 10px;
+        /* 調整第二欄位的上邊距 */
+    }
+
+    .cart-table .input-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .cart-table .input-group-prepend,
+    .cart-table .input-group-append {
+        flex-basis: 20%;
+    }
+
+    .cart-table .input-group input {
+        flex-grow: 1;
+        margin: 0 10px;
+    }
+
+    #sec2 .quantity-input {
+        margin: 0;
+        margin-top: 6px;
+        font-size: 22px;
+        height: 39.6px;
+
+    }
+
+
+    tr {
+        border: 3px solid #000;
+    }
+
+    td {
+        border: none;
+        margin: 0;
+    }
+}

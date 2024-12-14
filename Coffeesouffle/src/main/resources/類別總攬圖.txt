@@ -1,0 +1,84 @@
+src/main/java
+└── com
+    └── example
+        └── demo
+            ├── controller        # 控制器層，處理 HTTP 請求和響應
+            │   ├── AIAnalysisController.java      # 處理 AI 分析相關請求
+            │   ├── ForgetController.java          # 處理忘記密碼請求
+            │   ├── LoginController.java           # 處理使用者登入
+            │   ├── MemberController.java          # 處理會員相關操作
+            │   ├── MenuController.java            # 處理菜單相關操作
+            │   ├── OrderController.java           # 處理訂單相關操作
+            │   ├── PathController.java            # 處理路徑設定
+            │   ├── QRCodeController.java          # 處理 QR 碼生成
+            │   └── SalesAnalysisController.java   # 處理銷售分析請求
+            │
+            ├── dao                # 資料存取層，與資料庫交互
+            │   ├── CustomerDao.java               # 定義客戶資料操作介面
+            │   ├── CustomerDaoImpl.java           # 實現客戶資料操作邏輯
+            │   ├── MemberDao.java                 # 定義會員資料操作介面
+            │   ├── MemberDaoImpl.java             # 實現會員資料操作邏輯
+            │   ├── MenuDao.java                   # 定義菜單資料操作介面
+            │   ├── MenuDaoImpl.java               # 實現菜單資料操作邏輯
+            │   ├── NewsDao.java                   # 定義新聞資料操作介面
+            │   ├── NewsDaoImpl.java               # 實現新聞資料操作邏輯
+            │   ├── OrderDao.java                  # 定義訂單資料操作介面
+            │   ├── OrderDaoImpl.java              # 實現訂單資料操作邏輯
+            │   ├── OrderItemDao.java              # 定義訂單項目資料操作介面
+            │   └── OrderItemDaoImpl.java          # 實現訂單項目資料操作邏輯
+            │
+            ├── filter             # 過濾層，用於請求處理
+            │   ├── MyCorsConfig.java              # 處理跨域資源共享設定
+            │   └── RootFilter.java                # 全域過濾器
+            │
+            ├── hash               # 雜湊功能
+            │   ├── SimpleAddSaltHash.java         # 加鹽雜湊處理
+            │   └── TEST.java                      # 測試類
+            │
+            ├── model              # 數據模型層，分為 DTO 和 PO
+            │   ├── dto
+            │   │   ├── MemberDto.java             # 會員數據傳輸對象
+            │   │   ├── MenuDto.java               # 菜單數據傳輸對象
+            │   │   ├── NewsDto.java               # 新聞數據傳輸對象
+            │   │   ├── OrderDto.java              # 訂單數據傳輸對象
+            │   │   └── OrderItemDto.java          # 訂單項目數據傳輸對象
+            │   └── po
+            │       ├── Member.java                # 會員實體類
+            │       ├── Menu.java                  # 菜單實體類
+            │       ├── News.java                  # 新聞實體類
+            │       ├── Order.java                 # 訂單實體類
+            │       └── OrderItem.java             # 訂單項目實體類
+            │
+            ├── service            # 業務邏輯層
+            │   ├── ForgetService.java             # 忘記密碼相關邏輯
+            │   ├── MemberService.java             # 會員業務邏輯
+            │   ├── MenuService.java               # 菜單業務邏輯
+            │   ├── NewsService.java               # 新聞業務邏輯
+            │   ├── OrderService.java              # 訂單業務邏輯
+            │   └── QRCodeGenerator.java           # QR 碼生成邏輯
+            │
+            └── resources          # 靜態資源
+                ├── static
+                │   ├── css
+                │   ├── img
+                │   └── js
+                │       ├── member_backend.js      # 會員後端處理
+                │       ├── member.js              # 會員前端處理
+                │       ├── order_backend.js       # 訂單後端處理
+                │       ├── order.js               # 訂單前端處理
+                │       └── script.js              # 通用腳本
+                ├── templates
+                │   ├── application.properties     # 配置文件
+                │   └── Coffeesouffle.txt          # 項目說明文件
+                └── WEB-INF/view                   # JSP 視圖
+                    ├── cart.jsp
+                    ├── Charts.jsp
+                    ├── error.jsp
+                    ├── index.jsp
+                    ├── member_backend.jsp
+                    ├── member_charts.jspf
+                    ├── member.jsp
+                    ├── order_backend.jsp
+                    ├── order_charts.jspf
+                    ├── order.jsp
+                    └── table.jsp

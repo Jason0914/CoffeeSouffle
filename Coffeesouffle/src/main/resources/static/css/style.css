@@ -1,0 +1,572 @@
+/* 字型 NaikaiFont 最適合字體*/
+/* @font-face { */
+/*   font-family: "cat"; */
+/*   src: url(/fonts/NaikaiFont-Regular.ttf) format(truetype); */
+/* } */
+
+/*以下是三個不同風格的推薦字體，可以用來替換目前的字體，讓你的設計更具吸引力或個性化：
+
+1. Noto Sans TC（無襯線，適合清晰閱讀）*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
+/*2. Zhi Mang Xing（手寫風，適合標題）*/
+@import url('https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap');
+/* 3. Dancing Script（優雅，適合描述性文字） */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600&display=swap');
+
+/* 字型 jf 粉圓字體*/
+/* @font-face { */
+/*   font-family: "jf"; */
+/*   src: url(/fonts/jf-openhuninn-2.0.ttf) format(truetype); */
+/* } */
+
+/* 字型 Chen 手寫字體*/
+/* @font-face { */
+/*   font-family: "hand"; */
+/*   src: url(/fonts/ChenYuluoyan-Thin.ttf) format(truetype); */
+/* } */
+
+:root {
+  --c-base-10: rgb(255, 255, 255); /* 白 */
+  --c-base-07: #8ed1fc;
+  --c-sub1-10: rgb(245, 245, 245); /* 白 */
+  --c-sub2-10: #8ed1fc;
+  --c-sub3-10: rgb(255, 255, 255);
+  --c-sub3-08: rgb(255, 255, 255);
+  --c-sub3-05: rgb(255, 255, 255);
+  --c-sub4-10: rgba(255, 200, 220, 1);
+
+
+font-family: 'Noto Sans TC', sans-serif;
+font-family: 'Zhi Mang Xing', cursive;
+font-family: 'Dancing Script', cursive;
+
+
+/*   --f-family: "cat", "jf", sans-serif; */
+/*   --f-hand: "hand", "jf", sans-serif; */
+}
+
+/* .hello { */
+/*   position: fixed; */
+/*   top: 50px; */
+/*   距離底部的距離 */
+/*   left: 50%; */
+/*   transform: translateX(-50%); */
+/*   z-index: 1000; */
+/*   設置 z-index 為較大的數值，確保它在最上層 */
+/*   padding-top: 10px; */
+/* } */
+
+/* Sweet Alert2 */
+.swal2-popup,
+.swal2-actions .swal2-confirm,
+.swal2-actions .swal2-cancel {
+  border-radius: 15px;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--c-sub1-10);
+  color: #333;
+  font-family: var(--f-family);
+  font-size: 26px;
+  position: relative;
+   padding-top: 100px;
+}
+
+/* Header 按鈕樣式 */
+.header-buttons {
+  display: flex;
+  gap: 20px; /* 按鈕之間的間距 */
+  margin-left: auto; /* 按鈕向右對齊 */
+}
+
+.header-btn {
+  text-decoration: none; /* 去除下劃線 */
+  font-size: 1.25rem; /* 按鈕文字大小 */
+  font-weight: bold; /* 按鈕文字加粗 */
+  padding: 10px 20px; /* 按鈕內邊距 */
+  background-color: #ffffff; /* 白色背景 */
+  color: #000000; /* 黑色文字 */
+  border-radius: 25px; /* 圓角 */
+  transition: all 0.3s ease-in-out; /* 動態效果 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 添加陰影 */
+}
+
+.header-btn:hover {
+  background-color: #00d1ff; /* 懸停時背景色變為天藍色 */
+  color: #ffffff; /* 懸停時文字顏色變為白色 */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* 懸停時陰影加深 */
+}
+
+
+/* 針對表格外層容器添加 margin-top */
+.table-responsive {
+    margin-top: 100px; /* 與 header 保持距離 */
+}
+
+
+
+
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .show > .nav-link {
+  color: var(--c-base-10);
+  /* border-radius: 25px; */
+  /* border-color: var(--c-sub3-10); */
+}
+
+.navbar-light .navbar-toggler {
+  color: var(--c-sub3-10);
+}
+
+.Logo {
+  margin: -10px;
+  padding-left: 5px;
+}
+
+@media (max-width: 767px) {
+  #h1 {
+    font-size: 2rem;
+    /* 漢堡圖標的字體大小 */
+    text-align: center;
+    /* 標題水平置中 */
+  }
+
+  #nav-link {
+    font-size: 1.5rem;
+    /* li 元素中 a 標籤的字體大小 */
+    letter-spacing: 1rem;
+    /* text-align: center; */
+  }
+}
+
+/* section1 區域  */
+#sec1 img {
+  border-radius: 25px;
+}
+
+video::-webkit-media-controls {
+  display: none !important;
+}
+
+/* section1 區域  */
+#sec1 video {
+  height: 200px;
+}
+
+@media (min-width: 576px) {
+  #sec1 video {
+    height: 300px;
+  }
+}
+
+@media (min-width: 768px) {
+  #sec1 video {
+    height: 390px;
+  }
+}
+
+@media (min-width: 992px) {
+  #sec1 video {
+    height: 525px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #sec1 video {
+    height: 615px;
+  }
+}
+
+@media (min-width: 1400px) {
+  #sec1 video {
+    height: 730px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 商品區域樣式 */
+.products {
+    padding: 50px 20px;
+    background-color: #f9f9f9;
+}
+
+.product-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.product {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 100%;
+    flex: 1 1 calc(50% - 30px); /* 每行兩個產品 */
+}
+
+.product-info {
+    flex: 1;
+    padding: 0 20px;
+    text-align: left;
+}
+
+.product-info h2 {
+    font-family: "jf", sans-serif;
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.product-info p {
+    font-family: "cat", sans-serif;
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.product-info a {
+    text-decoration: none;
+    padding: 10px 20px;
+    background: #00aaff;
+    color: #fff;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+}
+
+.product-info a:hover {
+    background: #007acc;
+}
+
+.product-image {
+    flex: 1;
+    text-align: center;
+}
+
+.product-image img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* section2 區域 About Me */
+#sec2 {
+  min-height: 350px;
+}
+
+@media (min-width: 768px) {
+  #sec2 {
+    min-height: 400px;
+  }
+}
+
+@media (min-width: 992px) {
+  #sec2 {
+    min-height: 425px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #sec2 {
+    min-height: 450px;
+  }
+}
+
+@media (min-width: 1400px) {
+  #sec2 {
+    min-height: 475px;
+  }
+}
+
+#sec2 .about,
+#sec2 img {
+  width: calc(280px + 10vw);
+  height: calc(280px + 10vw);
+  border-radius: 25px;
+  max-height: 475px;
+  max-width: 475px;
+}
+
+.card-img {
+  opacity: 0.5;
+}
+
+#sec2 h2 {
+  font-size: clamp(30px, calc(16px + 1vw), 42px);
+  font-weight: 600;
+}
+
+#sec2 p {
+  text-indent: 2em;
+  font-size: clamp(16px, calc(16px + 1vw), 32px);
+}
+
+/* About Me 卡片效果 */
+
+.aboutcard,
+.aboutcard2 {
+  position: absolute;
+  backface-visibility: hidden;
+  transition: transform 0.6s ease-in;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.cardbox {
+  position: relative;
+}
+
+.cardbox:hover .aboutcard {
+  transform: rotatey(180deg);
+}
+
+.aboutcard2 {
+  transform: rotatey(-180deg);
+}
+
+.cardbox:hover .aboutcard2 {
+  transform: rotatey(0deg);
+}
+
+.aboutcard {
+  transform: rotatey(0deg);
+}
+
+/* section3 區域 News活動 */
+#sec3 .card,
+#sec3 img,
+#sec3 .btn,
+.newsbg {
+  border-radius: 25px;
+}
+
+#sec3 {
+  margin: 30px 0px;
+  min-height: 475px;
+}
+
+.newstitle {
+  color: rgb(0, 0, 0);
+  font-size: 40px;
+  font-weight: bold;
+}
+
+#sec3 .btn {
+  font-size: 1.3rem;
+}
+
+.newsbg {
+  background-color: var(--c-base-10);
+  padding: 10px;
+}
+
+
+
+/* Footer 整體樣式 */
+footer {
+	
+    background-color: var(--c-sub2-10); /* 背景色 */
+    padding: 20px 0; /* 上下內邊距 */
+    font-weight: bold; /* 文字加粗 */
+    text-align: center; /* 居中對齊 */
+    margin-top: 0; /* 去掉 footer 上方的預設間距 */
+    position: relative; /* 確保與圖表區域緊密銜接 */
+    padding-top: 20px; /* 增加內邊距，避免內容太靠近頂部 */
+}
+
+/* Footer 主容器 */
+footer .container-xl {
+    display: flex; /* 使用 Flexbox */
+    justify-content: space-between; /* 左右對齊 */
+    align-items: center; /* 垂直置中 */
+    padding: 0 20px;
+}
+
+/* Logo 和文字組合 */
+.footer-logo-text {
+    display: flex;
+    align-items: center; /* 垂直居中 */
+}
+
+.footer-logo-img {
+    width: auto; /* Logo 大小 */
+    height: auto;
+}
+
+.footer-logo-text p {
+     /* 版權文字大小 */
+    margin-left: 10px; /* Logo 與文字的間距 */
+}
+
+/* 夥伴登入按鈕樣式 */
+.footer-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none; /* 去除下劃線 */
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #ffffff; /* 白色背景 */
+    color: #000000; /* 黑色文字 */
+    border-radius: 8px; /* 圓角效果 */
+    padding: 10px 20px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 陰影效果 */
+    width: 120px; /* 固定寬度 */
+}
+
+.footer-btn:hover {
+    background-color: #00d1ff; /* 懸停時背景色 */
+    color: #ffffff; /* 懸停時文字顏色 */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* 加強陰影 */
+}
+
+.footer-btn div {
+    font-size: 1.2rem; /* 中文文字大小 */
+    margin-bottom: 5px; /* 中文和英文的間距 */
+}
+
+.footer-btn span {
+    font-size: 1rem; /* 英文文字大小 */
+    text-decoration: underline;
+}
+
+/* 讓圖表區域填滿剩餘空間 */
+#sec2 {
+    margin-bottom: 0; /* 去掉圖表與 footer 的間距 */
+    padding-bottom: 20px; /* 增加內邊距，與 footer 區域保持和諧 */
+     /* 圖表背景色與主題一致 */
+}
+
+
+
+
+/* 通用樣式：調整 LOGO 的大小和間距 */
+.footer-logo-img-Line,
+.footer-logo-img-FB,
+.footer-logo-img-IG {
+    width: 50px; /* 設定 LOGO 的寬度 */
+    height: auto; /* 自動調整高度，保持比例 */
+    margin: 0 10px; /* 為每個 LOGO 添加左右間距 */
+    display: inline-block; /* 確保 LOGO 水平排列 */
+    transition: transform 0.3s ease-in-out; /* 添加動畫效果 */
+}
+
+/* 滑鼠懸停效果 */
+.footer-logo-img-Line:hover,
+.footer-logo-img-FB:hover,
+.footer-logo-img-IG:hover {
+    transform: scale(1.1); /* 懸停時稍微放大 */
+}
+
+/* 手機版樣式 */
+@media (max-width: 768px) {
+    .footer-logo-img-Line,
+    .footer-logo-img-FB,
+    .footer-logo-img-IG {
+        width: 40px; /* 手機版縮小 LOGO 寬度 */
+        margin: 0 5px; /* 減少 LOGO 之間的間距 */
+    }
+}
+
+footer h3 {
+  color: var(--c-sub3-10);
+  font-size: 26px;
+  letter-spacing: 1rem;
+}
+
+footer a {
+  color: var(--c-sub3-10);
+  font-size: 26px;
+  letter-spacing: 0.2rem;
+}
+
+footer p {
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.flex-column {
+  padding: 15px 0px;
+}
+
+footer a:hover {
+  color: var(--c-base-10);
+}
+
+footer .active {
+  color: var(--c-base-10);
+}
+
+footer img {
+  max-width: 100px;
+  max-height: 100px;
+  padding: 0 0 10px 10px;
+}
+
+footer div {
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  footer h3 {
+    font-size: 28px;
+  }
+
+  footer a {
+    font-size: 28px;
+  }
+
+  footer p {
+    font-size: 22px;
+  }
+}
+
