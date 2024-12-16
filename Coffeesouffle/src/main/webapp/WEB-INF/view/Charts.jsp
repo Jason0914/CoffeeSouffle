@@ -160,10 +160,13 @@
             </div>
 
             <!-- 財務狀況統整 -->
-            <div class="report-container">
-                <h2>財務狀況統整</h2>
-                <div id="reportContent"></div>
-            </div>
+<div class="report-container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>財務狀況統整</h2>
+        <button onclick="clearFinancialData()" class="btn btn-danger">清空財務數據</button>
+    </div>
+    <div id="reportContent"></div>
+</div>
         </div>
     </main>
 
@@ -190,6 +193,37 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.1/dist/sweetalert2.all.min.js"></script>
     
     <script>
+    async function clearFinancialData() {
+        try {
+            const response = await fetch("/api/analysis/clear-financial-data", {
+                method: "DELETE"
+            });
+            const result = await response.json();
+            if (result.error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: '清空失敗',
+                    text: result.error
+                });
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: '清空成功',
+                    text: result.message
+                }).then(() => {
+                    // 重新載入報告
+                    fetchAndDisplayReport();
+                });
+            }
+        } catch (error) {
+            console.error("清空失敗：", error);
+            Swal.fire({
+                icon: 'error',
+                title: '清空失敗',
+                text: '請檢查控制台日誌'
+            });
+        }
+    }
       async function fetchAndDisplayReport() {
         try {
           const response = await fetch("/api/analysis/ai-report");
