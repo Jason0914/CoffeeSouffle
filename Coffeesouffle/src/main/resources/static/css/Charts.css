@@ -1,96 +1,4 @@
-/*以下是三個不同風格的推薦字體，可以用來替換目前的字體，讓你的設計更具吸引力或個性化：
-
-1. Noto Sans TC（無襯線，適合清晰閱讀）*/
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
-/*2. Zhi Mang Xing（手寫風，適合標題）*/
-@import url('https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap');
-/* 3. Dancing Script（優雅，適合描述性文字） */
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600&display=swap');
-/* 變數定義 */
-:root {
-    --c-base-10: rgb(255, 255, 255);
-    --c-base-07: #8ed1fc;
-    --c-sub1-10: rgb(245, 245, 245);
-    --c-sub2-10: #8ed1fc;
-    --c-sub3-10: rgb(255, 255, 255);
-    --c-sub3-08: rgb(255, 255, 255);
-    --c-sub3-05: rgb(255, 255, 255);
-    --c-sub4-10: rgba(255, 200, 220, 1);
-    
-    font-family: 'Noto Sans TC', sans-serif;
-font-family: 'Zhi Mang Xing', cursive;
-font-family: 'Dancing Script', cursive;
-    
-    
-}
-/* Sweet Alert2 */
-.swal2-popup,
-.swal2-actions .swal2-confirm,
-.swal2-actions .swal2-cancel {
-  border-radius: 15px;
-}
-
-/* 基礎樣式 */
-html {
-    font-size: 16px;
-}
-
-body {
-    font-family: 'Noto Sans TC', sans-serif;
-    margin: 0;
-    padding: 0;
-    padding-top: 100px;
-    background-color: var(--c-sub1-10);
-    color: #333;
-    font-size: 16px;
-}
-
-/* Header 樣式 */
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    background-color: white;
-}
-
-.Logo {
-    height: 90px;
-    width: auto;
-}
-
-#h1 {
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 1.8rem;
-    font-weight: bold;
-}
-
-.header-buttons {
-    display: flex;
-    gap: 20px;
-    margin-left: auto;
-}
-
-.header-btn {
-    text-decoration: none;
-    font-size: 1.25rem;
-    font-weight: bold;
-    padding: 10px 20px;
-    background-color: #ffffff;
-    color: #000000;
-    border-radius: 25px;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.header-btn:hover {
-    background-color: #00d1ff;
-    color: #ffffff;
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-}
-
-/* 主要內容樣式 */
+/* 主容器樣式 */
 .dashboard-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -100,40 +8,46 @@ header {
     margin: 0 auto;
 }
 
+/* 圖表區塊樣式 */
 .chart-box {
     grid-column: 1 / -1;
     background: #fff;
     border-radius: 10px;
-    padding: 20px;
+    padding: 25px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
 }
 
+/* 表格容器樣式 */
 .table-container {
     background: #fff;
     border-radius: 10px;
-    padding: 20px;
+    padding: 25px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
 }
 
+/* 報告容器樣式 */
 .report-container {
     background: #fff;
     border-radius: 10px;
-    padding: 20px;
+    padding: 25px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
 }
 
 /* 表格樣式 */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
-    font-size: 0.9rem;
+    margin: 20px 0;
+    background: #fff;
 }
 
 th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    padding: 12px 15px;
     text-align: center;
+    border: 1px solid #e0e0e0;
 }
 
 th {
@@ -142,86 +56,46 @@ th {
 }
 
 tr:hover {
-    background-color: #f9f9f9;
+    background-color: #f8f9fa;
 }
 
 /* 輸入欄位樣式 */
 input {
-    width: 90%;
-    padding: 5px;
+    width: 100%;
+    padding: 8px;
     text-align: center;
     border: 1px solid #ddd;
     border-radius: 4px;
+    outline: none;
 }
 
-/* Footer 樣式 */
-footer {
-    background-color: var(--c-sub2-10);
-    padding: 20px 0;
-    margin-top: 20px;
+input:focus {
+    border-color: #4A90E2;
+    box-shadow: 0 0 5px rgba(74,144,226,0.2);
 }
 
-footer .container-xl {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-}
-
-.footer-logo-text {
+/* 月份選擇器樣式 */
+.month-selector {
     display: flex;
     align-items: center;
-}
-
-.footer-logo-img {
-    width: 90px;
-    height: 90px;
-    object-fit: contain;
-}
-
-.footer-logo-text p {
-    margin: 0 0 0 10px;
-    font-size: 16px;
-}
-
-.footer-logo-img-Line,
-.footer-logo-img-FB,
-.footer-logo-img-IG {
-    width: 40px;
-    height: 40px;
-    margin: 0 10px;
-    display: inline-block;
-    transition: transform 0.3s ease-in-out;
-}
-
-.footer-logo-img-Line:hover,
-.footer-logo-img-FB:hover,
-.footer-logo-img-IG:hover {
-    transform: scale(1.1);
-}
-
-/* 標題樣式 */
-h1, h2 {
-    font-family: 'Noto Sans TC', sans-serif;
-    color: #333;
-    font-weight: bold;
-}
-
-h1 {
-    font-size: 1.8rem;
+    gap: 15px;
     margin: 20px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
 }
 
-h2 {
-    font-size: 1.5rem;
-    margin: 15px 0;
+select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
 }
 
-/* 按鈕樣式 */
-button {
-    padding: 8px 16px;
-    margin: 10px;
-    background-color: #00aaff;
+.save-btn {
+    padding: 8px 20px;
+    background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 4px;
@@ -229,63 +103,39 @@ button {
     transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #0088cc;
-}
-
-/* 月份選擇器樣式 */
-.month-selector {
-    margin: 20px 0;
-}
-
-select {
-    padding: 5px 10px;
-    margin: 0 10px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
+.save-btn:hover {
+    background-color: #45a049;
 }
 
 /* 響應式設計 */
 @media (max-width: 768px) {
     .dashboard-container {
         grid-template-columns: 1fr;
+        padding: 10px;
     }
 
-    .header-buttons {
+    .chart-box,
+    .table-container,
+    .report-container {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    th, td {
+        padding: 8px 10px;
+    }
+
+    .month-selector {
+        flex-direction: column;
+        align-items: stretch;
         gap: 10px;
     }
 
-    .header-btn {
-        font-size: 1rem;
-        padding: 8px 15px;
+    select, .save-btn {
+        width: 100%;
     }
 
-    table {
-        font-size: 14px;
-    }
-
-    .footer-logo-img-Line,
-    .footer-logo-img-FB,
-    .footer-logo-img-IG {
-        width: 30px;
-        height: 30px;
-        margin: 0 5px;
-    }
-
-    .footer-logo-img {
-        width: 70px;
-        height: 70px;
-    }
-
-    h1 {
-        font-size: 1.5rem;
-    }
-
-    h2 {
-        font-size: 1.3rem;
-    }
-
-    #h1 {
-        font-size: 1.5rem;
+    input {
+        padding: 6px;
     }
 }

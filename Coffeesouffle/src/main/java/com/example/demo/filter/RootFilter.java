@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpSession;
 
 import com.example.demo.model.po.Member;
 
-@WebFilter({"/menu_backend", "/news_backend", "/order_backend", "/member_backend"})
+@WebFilter({"/Charts", "/order_backend", "/member_backend"})
 public class RootFilter extends HttpFilter {
 
     private static final long serialVersionUID = 1L;

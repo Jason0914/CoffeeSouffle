@@ -14,8 +14,8 @@ src/main/java
             │   └── SalesAnalysisController.java   # 處理銷售分析請求
             │
             ├── dao                # 資料存取層，與資料庫交互
-            │   ├── CustomerDao.java               # 定義客戶資料操作介面
-            │   ├── CustomerDaoImpl.java           # 實現客戶資料操作邏輯
+            │   ├──
+            │   ├──
             │   ├── MemberDao.java                 # 定義會員資料操作介面
             │   ├── MemberDaoImpl.java             # 實現會員資料操作邏輯
             │   ├── MenuDao.java                   # 定義菜單資料操作介面
@@ -82,3 +82,115 @@ src/main/java
                     ├── order_charts.jspf
                     ├── order.jsp
                     └── table.jsp
+                    
+                    
+                    
+//更新
+專案名稱: Coffeesouffle [boot]
+
+1. Deployment Descriptor:
+   - Coffeesouffle
+
+2. Java Resources:
+   - src/main/java:
+       - com.example.demo:
+           - CoffeesouffleApplication.java
+           - KeyUtil.java
+       - com.example.demo.controller:
+           - AIAnalysisController.java
+           - ForgetController.java
+           - LoginController.java
+           - MemberController.java
+           - MenuController.java
+           - OrderController.java
+           - PathController.java
+           - QRCodeController.java
+           - SalesAnalysisController.java
+       - com.example.demo.dao:
+           - MemberDao.java
+           - MemberDaoImpl.java
+           - MenuDao.java
+           - NewsDao.java
+           - NewsDaoImpl.java
+           - OrderDao.java
+           - OrderDaoImpl.java
+           - OrderItemDao.java
+       - com.example.demo.filter:
+           - MyCorsConfig.java
+           - RootFilter.java
+       - com.example.demo.hash:
+           - PasswordHashGenerator.java
+       - com.example.demo.model.dto:
+           - MemberDto.java
+           - MenuDto.java
+           - NewsDto.java
+           - OrderDto.java
+           - OrderItemDto.java
+       - com.example.demo.model.po:
+           - Member.java
+           - Menu.java
+           - News.java
+           - Order.java
+           - OrderItem.java
+       - com.example.demo.service:
+           - ForgetService.java
+           - MemberService.java
+           - MenuService.java
+           - NewsService.java
+           - OrderService.java
+           - QRCodeGenerator.java
+
+   - src/main/resources:
+       - static:
+           - css:
+               - cart.css
+               - Charts.css
+               - member_backend.css
+               - member.css
+               - menu_backend.css
+               - menu.css
+               - order_backend.css
+               - order.css
+               - style.css
+           - img:
+               - carousel/
+               - icons/
+               - Logo/
+               - menu/
+               - news/
+               - coffee-print.png
+           - js:
+               - carousel/
+               - member_backend.js
+               - member.js
+               - order_backend.js
+               - order.js
+               - script.js
+       - templates:
+           - application.properties
+
+   - src/main/webapp:
+       - WEB-INF:
+           - view:
+               - cart.jsp
+               - Charts.jsp
+               - error.jsp
+               - index.jsp
+               - member_backend.jsp
+               - member.jsp
+               - order_backend.jsp
+               - order_charts.jspf
+               - order.jsp
+               - table.jsp
+
+3. src/test/java:
+   - 測試相關文件
+
+4. 其他文件:
+   - app.py
+   - forecast_model.py
+   - Dockerfile.txt
+   - pom.xml
+   - package-lock.json
+   - 其他資源文件（如 mvnw、類別圖4.png 等）
+

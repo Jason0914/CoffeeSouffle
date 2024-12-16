@@ -14,9 +14,9 @@ public class MyCorsConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin(""); // 設定允許的網域，可以指定具體的域名
-        config.addAllowedHeader("");
-        config.addAllowedMethod("");
+        config.addAllowedOrigin("*"); // 設定允許的網域，可以指定具體的域名
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }

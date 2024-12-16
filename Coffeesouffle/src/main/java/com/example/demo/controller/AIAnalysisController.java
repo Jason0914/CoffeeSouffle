@@ -34,12 +34,11 @@ public Map<String, Object> generateAIReport() {
         // 生成報告
         String report = generateReport(financialData, orderData);
 
-        // 調用 AI 建議
-        String suggestions = fetchAISuggestions(report);
+      
 
         return Map.of(
-            "report", report,
-            "suggestions", suggestions
+            "report", report
+          
         );
     } catch (Exception e) {
         e.printStackTrace();
@@ -111,54 +110,5 @@ public Map<String, Object> generateAIReport() {
         return report.toString();
     }
 
-    private String fetchAISuggestions(String report) {
-        try {
-            URL url = new URL("http://localhost:8084/ai_suggestions");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json");
-            conn.setDoOutput(true);
-    
-            // 確保傳送的數據結構包含 `financialData` 和 `salesData`
-            String jsonInputString = """
-                {
-                    "financialData": [
-                        {
-                            "month": "2024-12",
-                            "netProfit": 1000.0,
-                            "income": 5000.0,
-                            "expenses": 4000.0,
-                            "highestExpense": "原料成本"
-                        }
-                    ],
-                    "salesData": [
-                        {
-                            "productName": "拿鐵",
-                            "totalSales": 2000          
-                        },
-                        {
-                            "productName": "美式",
-                            "totalSales": 500
-                        }
-                    ]
-                }
-            """;
-    
-            try (OutputStream os = conn.getOutputStream()) {
-                byte[] input = jsonInputString.getBytes("utf-8");
-                os.write(input, 0, input.length);
-            }
-    
-            if (conn.getResponseCode() == 200) {
-                try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))) {
-                    return br.lines().collect(Collectors.joining("\n"));
-                }
-            } else {
-                throw new IOException("Flask API 返回錯誤，狀態碼：" + conn.getResponseCode());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "AI 建議生成失敗：" + e.getMessage();
-        }
-    }
+
 }    

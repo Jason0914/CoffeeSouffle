@@ -83,10 +83,10 @@
         <table id="orderTable" class="table table-striped">
             <thead>
                 <tr>
-                    <th>訂單時間</th>
+                    <th>訂單編號</th>
                     <th>桌號</th>
-                    <th>總金額</th>
-                    <th>操作</th>
+                    <th>訂單時間</th>
+                    <th>金額</th>
                 </tr>
             </thead>
             <tbody></tbody>

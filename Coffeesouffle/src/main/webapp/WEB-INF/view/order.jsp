@@ -166,9 +166,9 @@
         
        	<div>
 			
-			<img class="footer-logo-img-Line" alt="Line" src="img/Logo/LINElogo .png">
-			<img class="footer-logo-img-FB" alt="FB" src="img/Logo/FBlogo.png">
-			<img class="footer-logo-img-IG" alt="IG" src="img/Logo/IGlogo.png">
+			<img class="footer-logo-img-Line" alt="Line" src="/img/Logo/LINElogo .png">
+			<img class="footer-logo-img-FB" alt="FB" src="/img/Logo/FBlogo.png">
+			<img class="footer-logo-img-IG" alt="IG" src="/img/Logo/IGlogo.png">
 			
 			</div>
         

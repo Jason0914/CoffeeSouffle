@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/Charts.css">
 
     <!-- Icon -->
@@ -25,7 +26,7 @@
                     <div class="container-xxl p-0">
                         <a class="navbar-brand d-flex align-items-center" href="/index">
                             <img src="${pageContext.request.contextPath}/img/Logo/coffee2.png" class="Logo" height="90" alt="Logo">
-                            <h1 class="m-0 ms-3" id="h1">財務狀況後台</h1>
+                            <h1 class="m-0 ms-3" id="h1">財務狀況後臺</h1>
                         </a>
 
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
@@ -275,78 +276,43 @@
       }
 
       async function fetchSalesData() {
-        try {
-          // 獲取銷售排行資料
-          const rankingResponse = await fetch("/api/analysis/sales-ranking");
-          const salesRanking = await rankingResponse.json();
+    	  try {
+    	    // 只保留銷售排行資料的獲取
+    	    const rankingResponse = await fetch("/api/analysis/sales-ranking");
+    	    const salesRanking = await rankingResponse.json();
 
-          // 獲取銷售預測資料
-          const predictionResponse = await fetch(
-            "/api/analysis/sales-prediction?days=30"
-          );
-          const salesPrediction = await predictionResponse.json();
-
-          // 繪製銷售排名圖表
-          const rankingLabels = salesRanking.map((item) => item.productName);
-          const rankingValues = salesRanking.map((item) => item.totalSales);
-          new Chart(document.getElementById("salesRankingChart"), {
-            type: "bar",
-            data: {
-              labels: rankingLabels,
-              datasets: [
-                {
-                  label: "銷售額 (元)",
-                  data: rankingValues,
-                  backgroundColor: "rgba(75, 192, 192, 0.6)",
-                  borderColor: "rgba(75, 192, 192, 1)",
-                  borderWidth: 1,
-                },
-              ],
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: true,
-              scales: {
-                y: {
-                  beginAtZero: true,
-                  title: { display: true, text: "銷售額 (元)" },
-                },
-              },
-            },
-          });
-
-          // 繪製銷售預測圖表
-          const predictionLabels = salesPrediction.map((item) => item.ds);
-          const predictionValues = salesPrediction.map((item) => item.yhat);
-          new Chart(document.getElementById("salesPredictionChart"), {
-            type: "line",
-            data: {
-              labels: predictionLabels,
-              datasets: [
-                {
-                  label: "預測銷量 (元)",
-                  data: predictionValues,
-                  borderColor: "rgba(255, 99, 132, 1)",
-                  borderWidth: 2,
-                  fill: false,
-                },
-              ],
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: true,
-              scales: {
-                y: {
-                  beginAtZero: true,
-                  title: { display: true, text: "預測銷量 (元)" },
-                },
-              },
-            },
-          });
-        } catch (error) {
-          console.error("無法取得數據：", error);
-        }
-      }
+    	    // 只繪製銷售排名圖表
+    	    const rankingLabels = salesRanking.map((item) => item.productName);
+    	    const rankingValues = salesRanking.map((item) => item.totalSales);
+    	    new Chart(document.getElementById("salesRankingChart"), {
+    	      type: "bar",
+    	      data: {
+    	        labels: rankingLabels,
+    	        datasets: [
+    	          {
+    	            label: "銷售額 (元)",
+    	            data: rankingValues,
+    	            backgroundColor: "rgba(75, 192, 192, 0.6)",
+    	            borderColor: "rgba(75, 192, 192, 1)",
+    	            borderWidth: 1,
+    	          },
+    	        ],
+    	      },
+    	      options: {
+    	        responsive: true,
+    	        maintainAspectRatio: true,
+    	        scales: {
+    	          y: {
+    	            beginAtZero: true,
+    	            title: { display: true, text: "銷售額 (元)" },
+    	          },
+    	        },
+    	      },
+    	    });
+    	  } catch (error) {
+    	    console.error("無法取得數據：", error);
+    	  }
+    	}
 
       // 初始化資料載入
       fetchSalesData();

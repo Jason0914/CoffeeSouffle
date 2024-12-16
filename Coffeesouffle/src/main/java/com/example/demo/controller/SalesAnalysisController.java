@@ -49,36 +49,7 @@ public class SalesAnalysisController {
         return result;
     }
 
-    // 銷售預測
-    @GetMapping("/sales-prediction")
-    public List<Map<String, Object>> getSalesPrediction(@RequestParam int days) {
-        try {
-            URL url = new URL("http://localhost:8083/predict");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json");
-            conn.setDoOutput(true);
 
-            String jsonInputString = "{\"days\": " + days + "}";
-            try (OutputStream os = conn.getOutputStream()) {
-                byte[] input = jsonInputString.getBytes("utf-8");
-                os.write(input, 0, input.length);
-            }
-
-            if (conn.getResponseCode() == 200) {
-                try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))) {
-                    String response = br.lines().collect(Collectors.joining("\n"));
-                    ObjectMapper mapper = new ObjectMapper();
-                    return mapper.readValue(response, new TypeReference<List<Map<String, Object>>>() {});
-                }
-            } else {
-                throw new IOException("Flask API 返回錯誤，狀態碼：" + conn.getResponseCode());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return List.of(Map.of("error", "Flask API 調用失敗"));
-        }
-    }
     @PostMapping("/save-financial-data")
     public Map<String, String> saveFinancialData(@RequestBody Map<String, Object> requestData) {
         String month = (String) requestData.get("month"); // 接收月份
@@ -114,31 +85,5 @@ public class SalesAnalysisController {
         }
     }
     
-    // 新增的接口：AI 財報分析
-    @PostMapping("/ai-report")
-    public Map<String, Object> getAIReport(@RequestBody Map<String, Integer> body) {
-        int days = body.getOrDefault("days", 30); // 預測天數，默認 30 天
-
-        try {
-            // 調用銷售排行和預測
-            List<Map<String, Object>> salesRanking = getSalesRanking();
-            List<Map<String, Object>> salesPrediction = getSalesPrediction(days);
-
-            // 整合結果
-            Map<String, Object> result = new HashMap<>();
-            result.put("salesRanking", salesRanking);
-            result.put("salesPrediction", salesPrediction);
-
-            return Map.of(
-                "data", result,
-                "message", "AI 財報分析成功"
-            );
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Map.of(
-                "error", e.getMessage(),
-                "message", "AI 財報分析失敗"
-            );
-        }
-    }
+   
 }
