@@ -121,28 +121,28 @@
    </dependencies>
 
    <build>
-       <plugins>
-           <plugin>
-               <groupId>org.springframework.boot</groupId>
-               <artifactId>spring-boot-maven-plugin</artifactId>
-               <configuration>
-                   <executable>true</executable>
-                   <mainClass>com.example.demo.CoffeesouffleApplication</mainClass>
-               </configuration>
-               <executions>
-                   <execution>
-                       <goals>
-                           <goal>repackage</goal>
-                       </goals>
-                   </execution>
-               </executions>
-               <excludes>
-                   <exclude>
-                       <groupId>org.projectlombok</groupId>
-                       <artifactId>lombok</artifactId>
-                   </exclude>
-               </excludes>
-           </plugin>
-       </plugins>
-   </build>
+    <finalName>Coffeesouffle-0.0.1-SNAPSHOT</finalName>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <configuration>
+                <executable>true</executable>
+                <excludes>
+                    <exclude>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                    </exclude>
+                </excludes>
+            </configuration>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>repackage</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
 </project>
