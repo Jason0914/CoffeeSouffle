@@ -136,9 +136,10 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<excludes>
-						<exclude>
+						<exclude>true
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
+							<mainClass>com.example.demo.CoffeesouffleApplication</mainClass>
 						</exclude>
 					</excludes>
 				</configuration>
