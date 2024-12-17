@@ -1,10 +1,8 @@
 [build]
-builder = "maven"
-command = "mvn clean package -DskipTests"
+builder = "nixpacks"
 
 [deploy]
-startCommand = "java $JAVA_OPTS -jar target/Coffeesouffle-0.0.1-SNAPSHOT.war"
-restartPolicyType = "ON_FAILURE"
+startCommand = "java -Dserver.port=$PORT -jar target/*.jar"
 
 [[ports]]
 port = "8082"
