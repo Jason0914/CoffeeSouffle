@@ -1,0 +1,4 @@
+{
+  "build": "mvn clean package",
+  "start": "java -jar target/Coffeesouffle-0.0.1-SNAPSHOT.jar"
+}
