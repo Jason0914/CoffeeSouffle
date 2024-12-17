@@ -1,12 +1,10 @@
 [build]
-builder = "NIXPACKS"
-buildCommand = "mvn clean package -DskipTests"
+builder = "maven"
+command = "mvn clean package -DskipTests"
 
 [deploy]
-# 修改為明確的 war 檔案路徑和名稱
-startCommand = "java -jar /app/target/Coffeesouffle-0.0.1-SNAPSHOT.war --server.port=$PORT"
-healthcheckPath = "/"
-healthcheckTimeout = 300
+startCommand = "java $JAVA_OPTS -jar target/Coffeesouffle-0.0.1-SNAPSHOT.war"
+restartPolicyType = "ON_FAILURE"
 
-[service]
+[[ports]]
 port = "8082"
