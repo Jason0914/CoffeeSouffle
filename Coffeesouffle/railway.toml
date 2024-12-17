@@ -1,12 +1,13 @@
 [build]
 builder = "NIXPACKS"
-buildCommand = "mvn clean package -DskipTests"
+# 改用更明確的打包命令
+buildCommand = "mvn clean package spring-boot:repackage -DskipTests"
 
 [deploy]
+# 改為明確指定 WAR 檔案位置
 startCommand = "java -Dspring.profiles.active=prod -jar target/Coffeesouffle-0.0.1-SNAPSHOT.war"
 healthcheckPath = "/"
 healthcheckTimeout = 300
-restartPolicyType = "ON_FAILURE"
 
-[[ports]]
+[service]
 port = "8082"
