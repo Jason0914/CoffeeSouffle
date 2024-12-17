@@ -281,7 +281,7 @@ $(document).ready(function () {
                         <td>${order.totalPrice}元</td>
                         <td>
                             <button class="btn btn-success btn-sm" onclick="viewDetails(${order.orderId})">明細</button>
-                            <button class="btn btn-danger btn-sm" onclick="deleteOrder(${order.orderId})">刪除</button>
+                           
                         </td>
                     </tr>`;
                 tableBody.append(row);
@@ -338,38 +338,38 @@ $(document).ready(function () {
     };
 
     // 刪除訂單
-    window.deleteOrder = function (orderId) {
-        Swal.fire({
-            title: "確定刪除訂單？",
-            icon: "warning",
-            iconColor: "#4CAF50",
-            background: "rgb(0,0,0)",
-            color: "#4CAF50",
-            showCancelButton: true,
-            confirmButtonText: "刪除",
-            cancelButtonText: "取消"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                const queryParams = new URLSearchParams({
-                    clientId: clientId
-                });
-
-                fetch(`/table/orders/delete/${orderId}?${queryParams}`, { method: "DELETE" })
-                    .then((response) => {
-                        if (!response.ok) {
-                            throw new Error("刪除失敗");
-                        }
-                        Swal.fire("訂單已刪除", "", "success");
-                        fetchTableData();
-                    })
-                    .catch((error) => {
-                        console.error("刪除失敗：", error);
-                        Swal.fire("刪除失敗，請稍後再試", "", "error");
-                    });
-            }
-        });
-    };
-
+//    window.deleteOrder = function (orderId) {
+//        Swal.fire({
+//            title: "確定刪除訂單？",
+//            icon: "warning",
+//            iconColor: "#4CAF50",
+//            background: "rgb(0,0,0)",
+//            color: "#4CAF50",
+//            showCancelButton: true,
+//            confirmButtonText: "刪除",
+//            cancelButtonText: "取消"
+//        }).then((result) => {
+//            if (result.isConfirmed) {
+//                const queryParams = new URLSearchParams({
+//                    clientId: clientId
+//                });
+//
+//                fetch(`/table/orders/delete/${orderId}?${queryParams}`, { method: "DELETE" })
+//                    .then((response) => {
+//                        if (!response.ok) {
+//                            throw new Error("刪除失敗");
+//                        }
+//                        Swal.fire("訂單已刪除", "", "success");
+//                        fetchTableData();
+//                    })
+//                    .catch((error) => {
+//                        console.error("刪除失敗：", error);
+//                        Swal.fire("刪除失敗，請稍後再試", "", "error");
+//                    });
+//            }
+//        });
+//    };
+//<button class="btn btn-danger btn-sm" onclick="deleteOrder(${order.orderId})"></button> 
     // 日期格式化
     function formatDate(dateTime) {
         const date = new Date(dateTime);

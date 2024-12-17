@@ -1,7 +1,7 @@
 /* 主容器樣式 */
 .dashboard-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     padding: 20px;
     max-width: 1400px;
@@ -10,42 +10,44 @@
 
 /* 圖表區塊樣式 */
 .chart-box {
-    grid-column: 1 / -1;
     background: #fff;
     border-radius: 10px;
-    padding: 25px;
+    padding: 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
 }
 
 /* 表格容器樣式 */
 .table-container {
     background: #fff;
     border-radius: 10px;
-    padding: 25px;
+    padding: 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
 }
 
 /* 報告容器樣式 */
 .report-container {
     background: #fff;
     border-radius: 10px;
-    padding: 25px;
+    padding: 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
+}
+
+/* 標題文字大小調整 */
+h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
 }
 
 /* 表格樣式 */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
-    background: #fff;
+    margin: 15px 0;
+    font-size: 0.9rem;
 }
 
 th, td {
-    padding: 12px 15px;
+    padding: 8px 12px;
     text-align: center;
     border: 1px solid #e0e0e0;
 }
@@ -55,87 +57,56 @@ th {
     font-weight: bold;
 }
 
-tr:hover {
-    background-color: #f8f9fa;
-}
-
 /* 輸入欄位樣式 */
-input {
+input[type="number"] {
     width: 100%;
-    padding: 8px;
+    padding: 6px;
     text-align: center;
     border: 1px solid #ddd;
     border-radius: 4px;
-    outline: none;
-}
-
-input:focus {
-    border-color: #4A90E2;
-    box-shadow: 0 0 5px rgba(74,144,226,0.2);
+    font-size: 0.9rem;
 }
 
 /* 月份選擇器樣式 */
 .month-selector {
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin: 20px 0;
-    padding: 15px;
+    gap: 10px;
+    margin: 15px 0;
+    padding: 10px;
     background: #f8f9fa;
-    border-radius: 8px;
+    border-radius: 6px;
+    font-size: 0.9rem;
 }
 
 select {
-    padding: 8px 12px;
+    padding: 6px 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    background: #fff;
-    cursor: pointer;
+    font-size: 0.9rem;
 }
 
-.save-btn {
-    padding: 8px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
+.save-btn, .btn-danger {
+    padding: 6px 12px;
+    font-size: 0.9rem;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
-.save-btn:hover {
-    background-color: #45a049;
+#reportContent {
+    font-size: 0.9rem;
+    line-height: 1.5;
 }
 
 /* 響應式設計 */
+@media (max-width: 1200px) {
+    .dashboard-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     .dashboard-container {
         grid-template-columns: 1fr;
-        padding: 10px;
-    }
-
-    .chart-box,
-    .table-container,
-    .report-container {
-        padding: 15px;
-        margin-bottom: 15px;
-    }
-
-    th, td {
-        padding: 8px 10px;
-    }
-
-    .month-selector {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-    }
-
-    select, .save-btn {
-        width: 100%;
-    }
-
-    input {
-        padding: 6px;
     }
 }

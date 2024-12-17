@@ -59,86 +59,87 @@
 
             <!-- 營業計量表 -->
             <div class="table-container">
-                 <h2>營業計量表</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>項目</th>
-                <th>金額</th>
-                <th>輸入金額</th>
-            </tr>
-        </thead>
-        <tbody id="table-body">
-            <tr>
-                <td>營業收入</td>
-                <td id="income-amount">0</td>
-                <td>
-                    <input type="number" id="income-input" value="0" oninput="updateAll()">
-                </td>
-            </tr>
-            <tr>
-                <td>原物料成本</td>
-                <td class="expense-amount">0</td>
-                <td>
-                    <input type="number" class="expense-input" value="0" oninput="updateAll()">
-                </td>
-            </tr>
-            <tr>
-                <td>房租</td>
-                <td class="expense-amount">0</td>
-                <td>
-                    <input type="number" class="expense-input" value="0" oninput="updateAll()">
-                </td>
-            </tr>
-            <tr>
-                <td>水電瓦斯</td>
-                <td class="expense-amount">0</td>
-                <td>
-                    <input type="number" class="expense-input" value="0" oninput="updateAll()">
-                </td>
-            </tr>
-            <tr>
-                <td>薪資</td>
-                <td class="expense-amount">0</td>
-                <td>
-                    <input type="number" class="expense-input" value="0" oninput="updateAll()">
-                </td>
-            </tr>
-            <tr>
-                <td>勞健保</td>
-                <td class="expense-amount">0</td>
-                <td>
-                    <input type="number" class="expense-input" value="0" oninput="updateAll()">
-                </td>
-            </tr>
-            <tr>
-                <td>電信費</td>
-                <td class="expense-amount">0</td>
-                <td>
-                    <input type="number" class="expense-input" value="0" oninput="updateAll()">
-                </td>
-            </tr>
-            <tr>
-                <td>稅（每月）</td>
-                <td class="expense-amount">0</td>
-                <td>
-                    <input type="number" class="expense-input" value="0" oninput="updateAll()">
-                </td>
-            </tr>
-            <tr>
-                <td>雜項支出</td>
-                <td class="expense-amount">0</td>
-                <td>
-                    <input type="number" class="expense-input" value="0" oninput="updateAll()">
-                </td>
-            </tr>
-            <tr>
-                <td>淨利</td>
-                <td id="net-profit">0</td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
+                <h2>營業計量表</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>項目</th>
+                            <th>金額</th>
+                            <th>輸入金額</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <tr>
+                            <td>營業收入</td>
+                            <td id="income-amount">0</td>
+                            <td>
+                                <input type="number" id="income-input" value="0" oninput="updateAll()">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>原物料成本</td>
+                            <td class="expense-amount">0</td>
+                            <td>
+                                <input type="number" class="expense-input" value="0" oninput="updateAll()">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>房租</td>
+                            <td class="expense-amount">0</td>
+                            <td>
+                                <input type="number" class="expense-input" value="0" oninput="updateAll()">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>水電瓦斯</td>
+                            <td class="expense-amount">0</td>
+                            <td>
+                                <input type="number" class="expense-input" value="0" oninput="updateAll()">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>薪資</td>
+                            <td class="expense-amount">0</td>
+                            <td>
+                                <input type="number" class="expense-input" value="0" oninput="updateAll()">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>勞健保</td>
+                            <td class="expense-amount">0</td>
+                            <td>
+                                <input type="number" class="expense-input" value="0" oninput="updateAll()">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>電信費</td>
+                            <td class="expense-amount">0</td>
+                            <td>
+                                <input type="number" class="expense-input" value="0" oninput="updateAll()">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>稅（每月）</td>
+                            <td class="expense-amount">0</td>
+                            <td>
+                                <input type="number" class="expense-input" value="0" oninput="updateAll()">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>雜項支出</td>
+                            <td class="expense-amount">0</td>
+                            <td>
+                                <input type="number" class="expense-input" value="0" oninput="updateAll()">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>淨利</td>
+                            <td id="net-profit">0</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
                 <div class="month-selector">
                     <label for="month-select">選擇月份：</label>
                     <select id="month-select">
@@ -158,12 +159,10 @@
                     <button onclick="saveData()" class="save-btn">保存到資料庫</button>
                 </div>
             </div>
-
-            <!-- 財務狀況統整 -->
 <div class="report-container">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>財務狀況統整</h2>
-        <button onclick="clearFinancialData()" class="btn btn-danger">清空財務數據</button>
+        <button onclick="clearFinancialData()" class="btn btn-danger">清空所有財務數據</button>
     </div>
     <div id="reportContent"></div>
 </div>
@@ -195,10 +194,20 @@
     <script>
     async function clearFinancialData() {
         try {
-            const response = await fetch("/api/analysis/clear-financial-data", {
-                method: "DELETE"
+            const response = await fetch('/api/analysis/clear-financial-data', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
             });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
             const result = await response.json();
+            
             if (result.error) {
                 Swal.fire({
                     icon: 'error',
@@ -211,8 +220,13 @@
                     title: '清空成功',
                     text: result.message
                 }).then(() => {
-                    // 重新載入報告
+                    // 重新加載數據
                     fetchAndDisplayReport();
+                    // 重置所有輸入框
+                    document.querySelectorAll('input[type="number"]').forEach(input => {
+                        input.value = '0';
+                    });
+                    updateAll();
                 });
             }
         } catch (error) {
@@ -220,136 +234,165 @@
             Swal.fire({
                 icon: 'error',
                 title: '清空失敗',
-                text: '請檢查控制台日誌'
+                text: error.message || '請檢查控制台日誌'
             });
         }
     }
-      async function fetchAndDisplayReport() {
-        try {
-          const response = await fetch("/api/analysis/ai-report");
-          const result = await response.json();
 
-          if (result.error) {
-            document.getElementById(
-              "reportContent"
-            ).innerHTML = `<p>${result.error}</p>`;
-          } else {
-            document.getElementById("reportContent").innerHTML =
-              result.report.replace(/\n/g, "<br>");
-          }
-        } catch (error) {
-          console.error("無法載入報告：", error);
-          document.getElementById("reportContent").innerHTML =
-            "<p>無法載入報告，請稍後再試。</p>";
+    // 确保月份选择器正确初始化
+    document.addEventListener('DOMContentLoaded', function() {
+        const deleteMonthSelect = document.getElementById('delete-month-select');
+        if (deleteMonthSelect) {
+            console.log('Month selector found:', deleteMonthSelect.value); // 添加日誌
+        } else {
+            console.error('Month selector not found!'); // 添加錯誤日誌
         }
-      }
+    });
 
-      document.addEventListener("DOMContentLoaded", fetchAndDisplayReport);
 
-      function updateAll() {
-        const incomeInput = document.getElementById("income-input");
-        const incomeAmount = document.getElementById("income-amount");
-        const expenseInputs = document.querySelectorAll(".expense-input");
-        const expenseAmounts = document.querySelectorAll(".expense-amount");
+        async function fetchAndDisplayReport() {
+            try {
+                const response = await fetch("/api/analysis/ai-report");
+                const result = await response.json();
 
-        // 更新營業收入金額
-        const income = parseFloat(incomeInput.value) || 0;
-        incomeAmount.textContent = income;
-
-        // 計算支出金額
-        let totalExpenses = 0;
-        expenseInputs.forEach((input, index) => {
-          const amount = parseFloat(input.value) || 0;
-          totalExpenses += amount;
-          expenseAmounts[index].textContent = amount;
-        });
-
-        // 計算淨利
-        const netProfit = income - totalExpenses;
-        document.getElementById("net-profit").textContent = netProfit;
-      }
-
-      // 初始化時執行一次
-      document.addEventListener("DOMContentLoaded", updateAll);
-
-      async function saveData() {
-        const income =
-          parseFloat(document.getElementById("income-input").value) || 0;
-        const expenseInputs = document.querySelectorAll(".expense-input");
-        const expenseItems = document.querySelectorAll(".expense-amount");
-        const month = document.getElementById("month-select").value;
-
-        const data = [];
-        data.push({ itemName: "營業收入", amount: income });
-
-        let totalExpenses = 0;
-        expenseInputs.forEach((input, index) => {
-          const itemName =
-            expenseItems[index].parentElement.cells[0].textContent;
-          const amount = parseFloat(input.value) || 0; // 確保數據是浮點數
-          totalExpenses += amount;
-          data.push({ itemName, amount });
-        });
-
-        // 計算並添加淨利
-        const netProfit = income - totalExpenses;
-        data.push({ itemName: "淨利", amount: netProfit });
-
-        try {
-          const response = await fetch("/api/analysis/save-financial-data", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ month, data }),
-          });
-          const result = await response.json();
-          alert(result.message);
-        } catch (error) {
-          console.error("保存失敗：", error);
-          alert("保存失敗，請檢查控制台日誌");
+                if (result.error) {
+                    document.getElementById("reportContent").innerHTML = `<p>${result.error}</p>`;
+                } else {
+                    document.getElementById("reportContent").innerHTML = result.report.replace(/\n/g, "<br>");
+                }
+            } catch (error) {
+                console.error("無法載入報告：", error);
+                document.getElementById("reportContent").innerHTML = "<p>無法載入報告，請稍後再試。</p>";
+            }
         }
-      }
 
-      async function fetchSalesData() {
-    	  try {
-    	    // 只保留銷售排行資料的獲取
-    	    const rankingResponse = await fetch("/api/analysis/sales-ranking");
-    	    const salesRanking = await rankingResponse.json();
+        function updateAll() {
+            const incomeInput = document.getElementById("income-input");
+            const incomeAmount = document.getElementById("income-amount");
+            const expenseInputs = document.querySelectorAll(".expense-input");
+            const expenseAmounts = document.querySelectorAll(".expense-amount");
 
-    	    // 只繪製銷售排名圖表
-    	    const rankingLabels = salesRanking.map((item) => item.productName);
-    	    const rankingValues = salesRanking.map((item) => item.totalSales);
-    	    new Chart(document.getElementById("salesRankingChart"), {
-    	      type: "bar",
-    	      data: {
-    	        labels: rankingLabels,
-    	        datasets: [
-    	          {
-    	            label: "銷售額 (元)",
-    	            data: rankingValues,
-    	            backgroundColor: "rgba(75, 192, 192, 0.6)",
-    	            borderColor: "rgba(75, 192, 192, 1)",
-    	            borderWidth: 1,
-    	          },
-    	        ],
-    	      },
-    	      options: {
-    	        responsive: true,
-    	        maintainAspectRatio: true,
-    	        scales: {
-    	          y: {
-    	            beginAtZero: true,
-    	            title: { display: true, text: "銷售額 (元)" },
-    	          },
-    	        },
-    	      },
-    	    });
-    	  } catch (error) {
-    	    console.error("無法取得數據：", error);
-    	  }
-    	}
+            // 更新營業收入金額
+            const income = parseFloat(incomeInput.value) || 0;
+            incomeAmount.textContent = income;
 
-      // 初始化資料載入
-      fetchSalesData();
+            // 計算支出金額
+            let totalExpenses = 0;
+            expenseInputs.forEach((input, index) => {
+                const amount = parseFloat(input.value) || 0;
+                totalExpenses += amount;
+                expenseAmounts[index].textContent = amount;
+            });
+
+            // 計算淨利
+            const netProfit = income - totalExpenses;
+            document.getElementById("net-profit").textContent = netProfit;
+        }
+
+        async function saveData() {
+            const month = document.getElementById('month-select').value;
+            const income = parseFloat(document.getElementById("income-input").value) || 0;
+            const expenseInputs = document.querySelectorAll(".expense-input");
+            const expenseItems = document.querySelectorAll(".expense-amount");
+
+            const data = [];
+            data.push({ itemName: "營業收入", amount: income });
+
+            let totalExpenses = 0;
+            expenseInputs.forEach((input, index) => {
+                const itemName = input.closest('tr').cells[0].textContent;
+                const amount = parseFloat(input.value) || 0;
+                totalExpenses += amount;
+                data.push({ itemName, amount });
+            });
+
+            const netProfit = income - totalExpenses;
+            data.push({ itemName: "淨利", amount: netProfit });
+
+            try {
+                const response = await fetch("/api/analysis/save-financial-data", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ month, data }),
+                });
+                const result = await response.json();
+                
+                Swal.fire({
+                    icon: result.error ? 'error' : 'success',
+                    title: result.error ? '保存失敗' : '保存成功',
+                    text: result.message
+                }).then(() => {
+                    if (!result.error) {
+                        fetchAndDisplayReport();
+                    }
+                });
+            } catch (error) {
+                console.error("保存失敗：", error);
+                Swal.fire({
+                    icon: 'error',
+                    title: '保存失敗',
+                    text: '請檢查控制台日誌'
+                });
+            }
+        }
+        async function fetchSalesData() {
+            try {
+                console.log('開始獲取銷售數據');
+                const rankingResponse = await fetch("/api/analysis/sales-ranking");
+                if (!rankingResponse.ok) {
+                    throw new Error(`HTTP error! status: ${rankingResponse.status}`);
+                }
+                const salesRanking = await rankingResponse.json();
+                console.log('銷售數據:', salesRanking);
+
+                if (salesRanking && salesRanking.length > 0) {
+                    const rankingLabels = salesRanking.map((item) => item.product_name);
+                    const rankingValues = salesRanking.map((item) => item.total_sales);
+                    
+                    const ctx = document.getElementById("salesRankingChart").getContext('2d');
+                    new Chart(ctx, {
+                        type: "bar",
+                        data: {
+                            labels: rankingLabels,
+                            datasets: [{
+                                label: "銷售額 (元)",
+                                data: rankingValues,
+                                backgroundColor: "rgba(75, 192, 192, 0.6)",
+                                borderColor: "rgba(75, 192, 192, 1)",
+                                borderWidth: 1,
+                            }],
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    title: { display: true, text: "銷售額 (元)" }
+                                }
+                            },
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    position: 'top'
+                                }
+                            }
+                        }
+                    });
+                } else {
+                    console.log('沒有銷售數據');
+                }
+            } catch (error) {
+                console.error("無法取得數據：", error);
+            }
+        }
+
+        // 頁面載入時初始化
+        document.addEventListener("DOMContentLoaded", () => {
+            fetchSalesData();
+            fetchAndDisplayReport();
+            updateAll();
+        });
     </script>
-  </body>
+</body>
 </html>
