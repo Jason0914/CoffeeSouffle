@@ -5,7 +5,7 @@ FROM tomcat:9.0-jdk17-openjdk
 COPY target/Coffeesouffle-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/app.war
 
 
-EXPOSE 8082
+EXPOSE 8080
 
 # 啟動 Tomcat
 CMD ["catalina.sh", "run"]
