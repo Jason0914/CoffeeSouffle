@@ -216,10 +216,7 @@
 
 
 
-			<!-- 夥伴登入按鈕 -->
-			<a href="/member" class="footer-btn">
-				<div>夥伴登入</div> <span>Employee</span>
-			</a>
+			
 		</div>
 	</footer>
 

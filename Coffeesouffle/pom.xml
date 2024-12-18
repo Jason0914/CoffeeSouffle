@@ -14,7 +14,7 @@
    <version>0.0.1-SNAPSHOT</version>
    <name>Coffeesouffle</name>
    <description>Demo project for Spring Boot</description>
-   <packaging>jar</packaging>
+   <packaging>war</packaging>
    
    <properties>
        <java.version>17</java.version>
@@ -120,28 +120,23 @@
        </dependency>
    </dependencies>
 
-   <build>
+  <build>
     <finalName>Coffeesouffle-0.0.1-SNAPSHOT</finalName>
     <plugins>
         <plugin>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-maven-plugin</artifactId>
             <configuration>
-                <executable>true</executable>
-                <excludes>
-                    <exclude>
-                        <groupId>org.projectlombok</groupId>
-                        <artifactId>lombok</artifactId>
-                    </exclude>
-                </excludes>
+                <mainClass>com.example.demo.CoffeesouffleApplication</mainClass>
             </configuration>
-            <executions>
-                <execution>
-                    <goals>
-                        <goal>repackage</goal>
-                    </goals>
-                </execution>
-            </executions>
+        </plugin>
+        <!-- 添加 war 插件 -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <configuration>
+                <failOnMissingWebXml>false</failOnMissingWebXml>
+            </configuration>
         </plugin>
     </plugins>
 </build>

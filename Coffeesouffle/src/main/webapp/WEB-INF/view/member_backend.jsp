@@ -40,7 +40,7 @@ if (session.getAttribute("member") == null || session.getAttribute("loginStatus"
 					<div class="container-xxl p-0">
 						<a class="navbar-brand d-flex align-items-center" href="/index">
 							<img src="/img/Logo/coffee2.png" class="Logo" height="90" alt="">
-							<h1 class="m-0 ms-3" id="h1">員工管理後台</h1>
+							<h1 class="m-0 ms-3" id="h1">員工管理後臺</h1>
 						</a>
 
 						<button class="navbar-toggler" type="button"
@@ -339,6 +339,14 @@ if (session.getAttribute("member") == null || session.getAttribute("loginStatus"
 				<p class="mb-0 ms-2">© 2024 Coffee Soufflé. All rights reserved.</p>
 			</div>
 		</div>
+			<div>
+
+				<img class="footer-logo-img-Line" alt="Line"
+					src="img/Logo/LINElogo .png"> <img class="footer-logo-img-FB"
+					alt="FB" src="img/Logo/FBlogo.png"> <img
+					class="footer-logo-img-IG" alt="IG" src="img/Logo/IGlogo.png">
+
+			</div>
 	</footer>
 
 	<!-- Scripts -->

@@ -2,7 +2,10 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "java -Dserver.port=$PORT -jar target/*.jar"
+startCommand = "java -Dserver.port=$PORT -jar target/Coffeesouffle-0.0.1-SNAPSHOT.war"
+healthcheckPath = "/"
+healthcheckTimeout = 300
 
-[[ports]]
-port = "8082"
+[nixpacks]
+# 指定 Java 版本
+jdk_version = "17"
