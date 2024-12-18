@@ -1,11 +1,12 @@
 [build]
 builder = "nixpacks"
+buildCommand = "mvn clean package -DskipTests"
 
 [deploy]
-startCommand = "java -Dserver.port=$PORT -jar target/Coffeesouffle-0.0.1-SNAPSHOT.war"
+# 使用確切的 WAR 檔案名稱
+startCommand = "java -Dspring.profiles.active=prod org.springframework.boot.loader.WarLauncher -jar target/Coffeesouffle-0.0.1-SNAPSHOT.war --server.port=$PORT"
 healthcheckPath = "/"
 healthcheckTimeout = 300
 
-[nixpacks]
-# 指定 Java 版本
-jdk_version = "17"
+[service]
+port = "8082"
