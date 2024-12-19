@@ -1,0 +1,8 @@
+runtime: java17
+instance_class: F1
+env_variables:
+  SPRING_DATASOURCE_URL: jdbc:mysql://google/coffeesouffle?cloudSqlInstance=coffeesouffle:asia-east1:coffeesouffle&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&serverTimezone=Asia/Taipei
+  SPRING_DATASOURCE_USERNAME: root
+  SPRING_DATASOURCE_PASSWORD: A0918088240a
+beta_settings:
+  cloud_sql_instances: coffeesouffle:asia-east1:coffeesouffle
