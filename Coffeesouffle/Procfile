@@ -1,1 +1,2 @@
-web: java -Dserver.port=$PORT -jar target/your-application.war
+web: java -Dserver.port=$PORT -jar target/Coffeesouffle-0.0.1-SNAPSHOT.war
+
