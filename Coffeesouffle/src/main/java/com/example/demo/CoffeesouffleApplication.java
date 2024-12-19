@@ -23,13 +23,5 @@ public class CoffeesouffleApplication extends SpringBootServletInitializer {
         SpringApplication.run(CoffeesouffleApplication.class, args);
     }
     
-    @Bean
-    public DataSource dataSource() {
-        return DataSourceBuilder.create()
-            .url(System.getenv("MYSQL_URL"))
-            .username(System.getenv("MYSQLUSER"))
-            .password(System.getenv("MYSQLPASSWORD"))
-            .driverClassName("com.mysql.cj.jdbc.Driver")
-            .build();
-    }
+   
 }
