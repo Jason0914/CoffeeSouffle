@@ -1,4 +1,4 @@
-# web: ls -R  java -Dserver.port=$PORT -jar target/Coffeesouffle-0.0.1-SNAPSHOT.war
+web: java -Dserver.port=$PORT -jar target/Coffeesouffle-0.0.1-SNAPSHOT.war
 
 
 
