@@ -34,7 +34,7 @@ public class PathController {
         }
         return "member";
     }
-
+    
     @GetMapping("/cart")
     public String cartPage() {
         return "cart";

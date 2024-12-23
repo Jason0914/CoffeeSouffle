@@ -21,6 +21,21 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    // 新增前台訂單提交端點
+    @PostMapping("/submitOrder")
+    @ResponseBody
+    public ResponseEntity<?> submitOrder(@RequestBody OrderDto orderDto) {
+        try {
+            if (orderDto.getClientId() == null || orderDto.getClientId().trim().isEmpty()) {
+                return ResponseEntity.badRequest().body("缺少客戶識別碼");
+            }
+            orderService.createOrder(orderDto);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("建立訂單失敗：" + e.getMessage());
+        }
+    }
+
     // 後台管理頁面
     @GetMapping("/order_backend")
     public String getAllOrder(Model model) {
@@ -38,21 +53,6 @@ public class OrderController {
     @ResponseBody
     public List<OrderItem> getOrderItem(@PathVariable("orderId") Integer orderId) {
         return orderService.getOrderItemById(orderId);
-    }
-
-    // 新增訂單
-    @PostMapping("/order_backend/")
-    @ResponseBody
-    public ResponseEntity<?> createOrder(@RequestBody OrderDto orderDto) {
-        try {
-            if (orderDto.getClientId() == null || orderDto.getClientId().trim().isEmpty()) {
-                return ResponseEntity.badRequest().body("缺少客戶識別碼");
-            }
-            orderService.createOrder(orderDto);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("建立訂單失敗：" + e.getMessage());
-        }
     }
 
     // 後台刪除訂單
@@ -88,7 +88,6 @@ public class OrderController {
         try {
             Map<String, Object> response = new HashMap<>();
             
-            // 驗證訂單擁有權
             Order order = orderService.getOrderByIdAndClientId(orderId, clientId);
             if (order == null) {
                 return ResponseEntity.badRequest().body("無法存取此訂單");
@@ -125,6 +124,3 @@ public class OrderController {
         }
     }
 }
-
-
-

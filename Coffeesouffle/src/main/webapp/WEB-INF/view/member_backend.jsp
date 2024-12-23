@@ -333,22 +333,20 @@ if (session.getAttribute("member") == null || session.getAttribute("loginStatus"
 	<footer>
 		<div
 			class="container-xl d-flex justify-content-between align-items-center">
+			<!-- Logo 和版權文字 -->
 			<div class="footer-logo-text d-flex align-items-center">
 				<img src="/img/Logo/coffee2.png" class="footer-logo-img"
 					alt="Coffee Soufflé Logo">
 				<p class="mb-0 ms-2">© 2024 Coffee Soufflé. All rights reserved.</p>
 			</div>
-		</div>
 			<div>
-
 				<img class="footer-logo-img-Line" alt="Line"
 					src="img/Logo/LINElogo .png"> <img class="footer-logo-img-FB"
 					alt="FB" src="img/Logo/FBlogo.png"> <img
 					class="footer-logo-img-IG" alt="IG" src="img/Logo/IGlogo.png">
-
 			</div>
+		</div>
 	</footer>
-
 	<!-- Scripts -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script

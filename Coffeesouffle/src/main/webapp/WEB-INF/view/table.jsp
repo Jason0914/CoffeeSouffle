@@ -146,12 +146,12 @@
             <!-- 夥伴登入按鈕 -->
             <a href="/member" class="footer-btn">
                 <div>夥伴登入</div>
-                <span>Employee</span>
+                <span>staff only</span>
             </a>
         </div>
     </footer>
 
     <!-- JavaScript -->
-    <script src="/js/order.js"></script>
+    <script src="/js/table.js"></script>
 </body>
 </html>
