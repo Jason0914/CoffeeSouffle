@@ -32,7 +32,51 @@ body {
 }
 
 
+/* 分頁控制樣式 */
+.simple-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
 
+.simple-pagination ul {
+    display: flex;
+    gap: 5px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.simple-pagination li {
+    margin: 0;
+}
+
+.simple-pagination li a, 
+.simple-pagination li span {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #333;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.simple-pagination li a:hover {
+    background-color: #f5f5f5;
+}
+
+.simple-pagination .active span {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.pagination-info {
+    color: #666;
+    font-size: 14px;
+    margin-top: 10px;
+}
 
 
 

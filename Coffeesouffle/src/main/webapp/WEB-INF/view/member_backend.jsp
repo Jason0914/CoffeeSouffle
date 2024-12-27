@@ -118,8 +118,10 @@ if (session.getAttribute("member") == null || session.getAttribute("loginStatus"
 						</tbody>
 					</table>
 
-					<!-- 分頁控制 -->
-					<div id="pagination-container" class="mt-3"></div>
+					<!-- 在表格下方添加分頁控制區 -->
+<div class="d-flex justify-content-center">
+    <div id="pagination-container" class="mt-3 mb-3"></div>
+</div>
 				</div>
 			</div>
 		</div>

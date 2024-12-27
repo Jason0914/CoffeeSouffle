@@ -77,7 +77,7 @@
                                 <th>桌號 <img src="/img/icons/down.svg" alt=""></th>
                                 <th>訂餐時間 <img src="/img/icons/down.svg" alt=""></th>
                                 <th>總金額 <img src="/img/icons/down.svg" alt=""></th>
-                                <th>操作</th>
+                            
                             </tr>
                         </thead>
                         <tbody>
@@ -103,7 +103,7 @@
                                             <!-- HttpMethod 隱藏欄位 -->
                                             <input name="_method" type="hidden" value="delete"/>
                                             <input type="hidden" name="orderId" value="${order.orderId}"/>
-                                            <button type="button" class="btn btn-outline-danger deleteButton" id="deleteButton">刪除</button>
+<!--                                             <button type="button" class="btn btn-outline-danger deleteButton" id="deleteButton">刪除</button> -->
                                         </form>
                                     </td>
                                 </tr>
@@ -112,11 +112,9 @@
                     </table>
 
                     <!-- 分頁 pagination-container -->
-                    <div class="container-xl pagination my-3">
-                        <div class="row">
-                            <div id="pagination-container"></div>
-                        </div>
-                    </div>
+<div class="d-flex justify-content-center">
+    <div id="pagination-container" class="mt-3 mb-3"></div>
+</div>
                 </div>
             </div>
         </div>

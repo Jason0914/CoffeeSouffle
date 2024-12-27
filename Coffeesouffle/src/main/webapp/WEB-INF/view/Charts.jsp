@@ -161,9 +161,12 @@
             </div>
 <div class="report-container">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>財務狀況統整</h2>
-        <button onclick="clearFinancialData()" class="btn btn-danger">清空所有財務數據</button>
+    <h2>財務狀況統整</h2>
+    <div>
+        <button onclick="clearFinancialData()" class="btn btn-danger me-2">清空所有財務數據</button>
+        <button onclick="exportToPDF()" class="btn btn-primary">匯出 PDF 報表</button>
     </div>
+</div>
     <div id="reportContent"></div>
 </div>
         </div>
@@ -192,13 +195,20 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.1/dist/sweetalert2.all.min.js"></script>
     
     <script>
-    async function clearFinancialData() {
+
+    // 月份變更事件處理
+    document.getElementById('month-select').addEventListener('change', function() {
+        // 保存選擇的月份到 localStorage
+        localStorage.setItem('selectedMonth', this.value);
+        loadLatestData();
+    });
+
+    async function exportToPDF() {
         try {
-            const response = await fetch('/api/analysis/clear-financial-data', {
-                method: 'DELETE',
+            const response = await fetch('/api/analysis/export-pdf', {
+                method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+                    'Accept': 'application/pdf'
                 }
             });
             
@@ -206,28 +216,85 @@
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             
-            const result = await response.json();
+            const blob = await response.blob();
+            const downloadUrl = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = downloadUrl;
+            a.download = 'financial_report.pdf';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(downloadUrl);
             
-            if (result.error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: '清空失敗',
-                    text: result.error
+            Swal.fire({
+                icon: 'success',
+                title: 'PDF 匯出成功',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        } catch (error) {
+            console.error('匯出失敗:', error);
+            Swal.fire({
+                icon: 'error',
+                title: '匯出失敗',
+                text: '請稍後再試'
+            });
+        }
+    }
+
+    async function clearFinancialData() {
+        try {
+            const result = await Swal.fire({
+                title: '確定要清空所有數據嗎？',
+                text: "此操作無法復原！",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '是的，清空！',
+                cancelButtonText: '取消'
+            });
+
+            if (result.isConfirmed) {
+                const response = await fetch('/api/analysis/clear-financial-data', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
                 });
-            } else {
-                Swal.fire({
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                
+                if (result.error) {
+                    throw new Error(result.error);
+                }
+
+                // 清空 localStorage 中的月份選擇
+                localStorage.removeItem('selectedMonth');
+                
+                // 重置表單
+                document.querySelectorAll('input[type="number"]').forEach(input => {
+                    input.value = '0';
+                });
+                updateAll();
+                
+                // 清空報告內容
+                document.getElementById("reportContent").innerHTML = "";
+                
+                await Swal.fire({
                     icon: 'success',
                     title: '清空成功',
-                    text: result.message
-                }).then(() => {
-                    // 重新加載數據
-                    fetchAndDisplayReport();
-                    // 重置所有輸入框
-                    document.querySelectorAll('input[type="number"]').forEach(input => {
-                        input.value = '0';
-                    });
-                    updateAll();
+                    text: result.message,
+                    showConfirmButton: false,
+                    timer: 1500
                 });
+                
+                await fetchAndDisplayReport();
             }
         } catch (error) {
             console.error("清空失敗：", error);
@@ -239,160 +306,258 @@
         }
     }
 
-    // 确保月份选择器正确初始化
-    document.addEventListener('DOMContentLoaded', function() {
-        const deleteMonthSelect = document.getElementById('delete-month-select');
-        if (deleteMonthSelect) {
-            console.log('Month selector found:', deleteMonthSelect.value); // 添加日誌
-        } else {
-            console.error('Month selector not found!'); // 添加錯誤日誌
-        }
-    });
+    async function fetchAndDisplayReport() {
+        try {
+            const response = await fetch("/api/analysis/ai-report");
+            const result = await response.json();
 
-
-        async function fetchAndDisplayReport() {
-            try {
-                const response = await fetch("/api/analysis/ai-report");
-                const result = await response.json();
-
-                if (result.error) {
-                    document.getElementById("reportContent").innerHTML = `<p>${result.error}</p>`;
-                } else {
-                    document.getElementById("reportContent").innerHTML = result.report.replace(/\n/g, "<br>");
-                }
-            } catch (error) {
-                console.error("無法載入報告：", error);
-                document.getElementById("reportContent").innerHTML = "<p>無法載入報告，請稍後再試。</p>";
+            const reportContent = document.getElementById("reportContent");
+            if (result.error) {
+                reportContent.innerHTML = `<p class="text-danger">${result.error}</p>`;
+            } else if (result.report) {
+                reportContent.innerHTML = result.report.replace(/\n/g, "<br>");
+            } else {
+                reportContent.innerHTML = "<p>無財務數據</p>";
             }
+        } catch (error) {
+            console.error("無法載入報告：", error);
+            document.getElementById("reportContent").innerHTML = "<p class='text-danger'>無法載入報告，請稍後再試。</p>";
         }
+    }
 
-        function updateAll() {
-            const incomeInput = document.getElementById("income-input");
-            const incomeAmount = document.getElementById("income-amount");
-            const expenseInputs = document.querySelectorAll(".expense-input");
-            const expenseAmounts = document.querySelectorAll(".expense-amount");
+    function updateAll() {
+        const incomeInput = document.getElementById("income-input");
+        const incomeAmount = document.getElementById("income-amount");
+        const expenseInputs = document.querySelectorAll(".expense-input");
+        const expenseAmounts = document.querySelectorAll(".expense-amount");
 
-            // 更新營業收入金額
-            const income = parseFloat(incomeInput.value) || 0;
-            incomeAmount.textContent = income;
+        const income = parseFloat(incomeInput.value) || 0;
+        incomeAmount.textContent = income.toLocaleString('en-US');
 
-            // 計算支出金額
-            let totalExpenses = 0;
-            expenseInputs.forEach((input, index) => {
-                const amount = parseFloat(input.value) || 0;
-                totalExpenses += amount;
-                expenseAmounts[index].textContent = amount;
-            });
+        let totalExpenses = 0;
+        expenseInputs.forEach((input, index) => {
+            const amount = parseFloat(input.value) || 0;
+            totalExpenses += amount;
+            expenseAmounts[index].textContent = amount.toLocaleString('en-US');
+        });
 
-            // 計算淨利
-            const netProfit = income - totalExpenses;
-            document.getElementById("net-profit").textContent = netProfit;
-        }
+        const netProfit = income - totalExpenses;
+        document.getElementById("net-profit").textContent = netProfit.toLocaleString('en-US');
+    }
 
-        async function saveData() {
-            const month = document.getElementById('month-select').value;
-            const income = parseFloat(document.getElementById("income-input").value) || 0;
-            const expenseInputs = document.querySelectorAll(".expense-input");
-            const expenseItems = document.querySelectorAll(".expense-amount");
+    async function saveData() {
+    	   const month = document.getElementById('month-select').value;
+    	   // 保存當前選擇的月份和數據到localStorage
+    	   localStorage.setItem('selectedMonth', month);
+    	   
+    	   // 獲取表單數據
+    	   const income = parseFloat(document.getElementById("income-input").value) || 0;
+    	   const expenseInputs = document.querySelectorAll(".expense-input");
+    	   
+    	   const data = [];
+    	   const localData = {};
+    	   
+    	   // 保存營業收入
+    	   data.push({ itemName: "營業收入", amount: income });
+    	   localData["營業收入"] = income;
 
-            const data = [];
-            data.push({ itemName: "營業收入", amount: income });
+    	   // 計算總支出並保存每項支出
+    	   let totalExpenses = 0;
+    	   expenseInputs.forEach(input => {
+    	       const itemName = input.closest('tr').cells[0].textContent;
+    	       const amount = parseFloat(input.value) || 0;
+    	       totalExpenses += amount;
+    	       data.push({ itemName, amount });
+    	       localData[itemName] = amount;
+    	   });
 
-            let totalExpenses = 0;
-            expenseInputs.forEach((input, index) => {
-                const itemName = input.closest('tr').cells[0].textContent;
-                const amount = parseFloat(input.value) || 0;
-                totalExpenses += amount;
-                data.push({ itemName, amount });
-            });
+    	   // 計算並保存淨利
+    	   const netProfit = income - totalExpenses;
+    	   data.push({ itemName: "淨利", amount: netProfit });
+    	   localData["淨利"] = netProfit;
 
-            const netProfit = income - totalExpenses;
-            data.push({ itemName: "淨利", amount: netProfit });
+    	   // 保存到 localStorage
+    	   localStorage.setItem(`financialData_${month}`, JSON.stringify(localData));
 
-            try {
-                const response = await fetch("/api/analysis/save-financial-data", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ month, data }),
-                });
-                const result = await response.json();
+    	   try {
+    	       // 保存到資料庫
+    	       const response = await fetch("/api/analysis/save-financial-data", {
+    	           method: "POST",
+    	           headers: { "Content-Type": "application/json" },
+    	           body: JSON.stringify({ month, data }),
+    	       });
+    	       const result = await response.json();
+    	       
+    	       if (result.error) {
+    	           throw new Error(result.error);
+    	       }
+
+    	       await Swal.fire({
+    	           icon: 'success',
+    	           title: '保存成功',
+    	           text: result.message || '數據已成功保存',
+    	           showConfirmButton: false,
+    	           timer: 1500
+    	       });
+    	       
+    	       // 更新顯示
+    	       await loadLatestData();
+    	       await fetchAndDisplayReport();
+    	       
+    	   } catch (error) {
+    	       console.error("保存失敗：", error);
+    	       Swal.fire({
+    	           icon: 'error',
+    	           title: '保存失敗',
+    	           text: error.message || '請稍後再試'
+    	       });
+    	       
+    	       // 即使保存到資料庫失敗，本地數據也已保存
+    	       console.log('本地數據已保存');
+    	   }
+    	}
+
+    async function fetchSalesData() {
+        try {
+            const rankingResponse = await fetch("/api/analysis/sales-ranking");
+            if (!rankingResponse.ok) {
+                throw new Error(`HTTP error! status: ${rankingResponse.status}`);
+            }
+            const salesRanking = await rankingResponse.json();
+
+            if (salesRanking && salesRanking.length > 0) {
+                const rankingLabels = salesRanking.map((item) => item.product_name);
+                const rankingValues = salesRanking.map((item) => item.total_sales);
                 
-                Swal.fire({
-                    icon: result.error ? 'error' : 'success',
-                    title: result.error ? '保存失敗' : '保存成功',
-                    text: result.message
-                }).then(() => {
-                    if (!result.error) {
-                        fetchAndDisplayReport();
-                    }
-                });
-            } catch (error) {
-                console.error("保存失敗：", error);
-                Swal.fire({
-                    icon: 'error',
-                    title: '保存失敗',
-                    text: '請檢查控制台日誌'
-                });
-            }
-        }
-        async function fetchSalesData() {
-            try {
-                console.log('開始獲取銷售數據');
-                const rankingResponse = await fetch("/api/analysis/sales-ranking");
-                if (!rankingResponse.ok) {
-                    throw new Error(`HTTP error! status: ${rankingResponse.status}`);
-                }
-                const salesRanking = await rankingResponse.json();
-                console.log('銷售數據:', salesRanking);
-
-                if (salesRanking && salesRanking.length > 0) {
-                    const rankingLabels = salesRanking.map((item) => item.product_name);
-                    const rankingValues = salesRanking.map((item) => item.total_sales);
-                    
-                    const ctx = document.getElementById("salesRankingChart").getContext('2d');
-                    new Chart(ctx, {
-                        type: "bar",
-                        data: {
-                            labels: rankingLabels,
-                            datasets: [{
-                                label: "銷售額 (元)",
-                                data: rankingValues,
-                                backgroundColor: "rgba(75, 192, 192, 0.6)",
-                                borderColor: "rgba(75, 192, 192, 1)",
-                                borderWidth: 1,
-                            }],
+                const ctx = document.getElementById("salesRankingChart").getContext('2d');
+                new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: rankingLabels,
+                        datasets: [{
+                            label: "銷售額 (元)",
+                            data: rankingValues,
+                            backgroundColor: "rgba(75, 192, 192, 0.6)",
+                            borderColor: "rgba(75, 192, 192, 1)",
+                            borderWidth: 1,
+                        }],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: { display: true, text: "銷售額 (元)" }
+                            }
                         },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: true,
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                    title: { display: true, text: "銷售額 (元)" }
-                                }
-                            },
-                            plugins: {
-                                legend: {
-                                    display: true,
-                                    position: 'top'
-                                }
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top'
                             }
                         }
-                    });
-                } else {
-                    console.log('沒有銷售數據');
+                    }
+                });
+            }
+        } catch (error) {
+            console.error("無法取得銷售數據：", error);
+        }
+    }
+
+    async function loadLatestData() {
+        try {
+            // 從 localStorage 獲取上次選擇的月份
+            let selectedMonth = localStorage.getItem('selectedMonth');
+            
+            // 如果沒有存儲的月份，則從當前選擇框獲取
+            if (!selectedMonth) {
+                selectedMonth = document.getElementById('month-select').value;
+            }
+
+            // 設置選擇框的值
+            document.getElementById('month-select').value = selectedMonth;
+
+            // 獲取指定月份的數據
+            const response = await fetch(`/api/analysis/financial-data/${selectedMonth}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            // 從 localStorage 獲取上次保存的數據
+            const savedData = localStorage.getItem(`financialData_${selectedMonth}`);
+            const parsedData = savedData ? JSON.parse(savedData) : null;
+            
+            if (data && data.items) {
+                // 如果有數據庫數據，則使用數據庫數據
+                const incomeInput = document.getElementById('income-input');
+                if (data.items['營業收入']) {
+                    incomeInput.value = data.items['營業收入'];
                 }
-            } catch (error) {
-                console.error("無法取得數據：", error);
+
+                const expenseInputs = document.querySelectorAll('.expense-input');
+                expenseInputs.forEach(input => {
+                    const itemName = input.closest('tr').cells[0].textContent;
+                    if (data.items[itemName]) {
+                        input.value = data.items[itemName];
+                    }
+                });
+                
+                // 保存到 localStorage
+                localStorage.setItem(`financialData_${selectedMonth}`, JSON.stringify(data.items));
+            } else if (parsedData) {
+                // 如果沒有數據庫數據但有本地存儲數據，則使用本地存儲數據
+                const incomeInput = document.getElementById('income-input');
+                if (parsedData['營業收入']) {
+                    incomeInput.value = parsedData['營業收入'];
+                }
+
+                const expenseInputs = document.querySelectorAll('.expense-input');
+                expenseInputs.forEach(input => {
+                    const itemName = input.closest('tr').cells[0].textContent;
+                    if (parsedData[itemName]) {
+                        input.value = parsedData[itemName];
+                    }
+                });
+            }
+
+            // 更新顯示
+            updateAll();
+        } catch (error) {
+            console.error('載入數據失敗:', error);
+            
+            // 如果加載失敗，嘗試從 localStorage 讀取
+            const savedData = localStorage.getItem(`financialData_${document.getElementById('month-select').value}`);
+            if (savedData) {
+                const parsedData = JSON.parse(savedData);
+                const incomeInput = document.getElementById('income-input');
+                if (parsedData['營業收入']) {
+                    incomeInput.value = parsedData['營業收入'];
+                }
+
+                const expenseInputs = document.querySelectorAll('.expense-input');
+                expenseInputs.forEach(input => {
+                    const itemName = input.closest('tr').cells[0].textContent;
+                    if (parsedData[itemName]) {
+                        input.value = parsedData[itemName];
+                    }
+                });
+                updateAll();
             }
         }
+    }
 
-        // 頁面載入時初始化
-        document.addEventListener("DOMContentLoaded", () => {
-            fetchSalesData();
-            fetchAndDisplayReport();
-            updateAll();
-        });
-    </script>
+    // 頁面載入時初始化
+    document.addEventListener("DOMContentLoaded", async () => {
+        await loadLatestData();
+        await fetchSalesData();
+        await fetchAndDisplayReport();
+        updateAll();
+    });
+</script>
+        
+   
 </body>
 </html>

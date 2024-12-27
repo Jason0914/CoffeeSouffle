@@ -61,24 +61,20 @@ function initializeTooltips() {
 // 初始化表單驗證
 function initFormValidation() {
     
-	// 新增員工表單
+	// 新增員工表單提交處理
 	$('#createEmployee').on('submit', function (e) {
 	    e.preventDefault();
 	    console.log('Form submitted');
 	    
 	    const formData = new FormData(this);
-	    // 移除原本的 isMember 值
-	    formData.delete('isMember');
-	    // 添加正確的整數值 1
-	    formData.append('isMember', '1');
-
-	    // 調試輸出
+	    
+	    // 輸出表單數據進行調試
 	    for (let pair of formData.entries()) {
 	        console.log(pair[0] + ': ' + pair[1]);
 	    }
 
 	    $.ajax({
-	        url: '/member_backend/',
+	        url: '/member_backend',
 	        type: 'POST',
 	        data: formData,
 	        processData: false,
@@ -100,7 +96,7 @@ function initFormValidation() {
 	            console.error('Error:', xhr.responseText);
 	            Swal.fire({
 	                title: '新增失敗',
-	                text: '請檢查輸入資料是否正確',
+	                text: xhr.responseText || '請檢查輸入資料是否正確',
 	                icon: 'error',
 	                iconColor: '#4CAF50',
 	                background: 'rgb(0,0,0)',
@@ -160,17 +156,26 @@ function initFormValidation() {
 // 編輯員工函數
 window.editMember = function (memberId) {
     console.log('Editing member:', memberId);
-    const row = $(`tr:has(button[onclick*="${memberId}"])`);
     
-    $('#updateMemberId').val(memberId);
-    $('#updateAccount').val(row.find('td:eq(1)').text());
-    $('#updateName').val(row.find('td:eq(2)').text());
-    $(`input[name="gender"][value="${row.find('td:eq(3)').text()}"]`).prop('checked', true);
-    $('#updateBirthday').val(row.find('td:eq(4)').text());
-    $('#updateEmail').val(row.find('td:eq(5)').text());
-    $('#updatePhone').val(row.find('td:eq(6)').text());
+    // 修改選擇器，確保準確找到對應的行數據
+    const row = $(`#memberTable tbody tr`).filter(function() {
+        return $(this).find('td:first').text() == memberId;
+    });
+    
+    if (row.length > 0) {
+        $('#updateMemberId').val(memberId);
+        // 使用 trim() 去除可能的空白
+        $('#updateAccount').val(row.find('td:eq(1)').text().trim());
+        $('#updateName').val(row.find('td:eq(2)').text().trim());
+        $(`input[name="gender"][value="${row.find('td:eq(3)').text().trim()}"]`).prop('checked', true);
+        $('#updateBirthday').val(row.find('td:eq(4)').text().trim());
+        $('#updateEmail').val(row.find('td:eq(5)').text().trim());
+        $('#updatePhone').val(row.find('td:eq(6)').text().trim());
 
-    $('#updateEmployeeModal').modal('show');
+        $('#updateEmployeeModal').modal('show');
+    } else {
+        console.error('Row not found for memberId:', memberId);
+    }
 };
 
 // 刪除員工函數
@@ -223,38 +228,48 @@ window.deleteMember = function (memberId) {
 
 // 初始化分頁功能
 function initializePagination() {
-    const itemsPerPage = getPerPage();
-    const $rows = $(".list-item");
+    const itemsPerPage = 10; // 固定每頁顯示10筆
+    const $rows = $("#memberTable tbody tr");
     const numItems = $rows.length;
 
-    if (numItems > itemsPerPage) {
-        $rows.slice(itemsPerPage).hide();
+    $rows.hide();
+    $rows.slice(0, itemsPerPage).show();
 
-        $('#pagination-container').pagination({
-            items: numItems,
-            itemsOnPage: itemsPerPage,
-            prevText: "&laquo;",
-            nextText: "&raquo;",
-            onPageClick: function (pageNumber) {
-                const from = itemsPerPage * (pageNumber - 1);
-                const to = from + itemsPerPage;
-                $rows.hide().slice(from, to).show();
-            }
-        });
-    }
+    $('#pagination-container').pagination({
+        items: numItems,
+        itemsOnPage: itemsPerPage,
+        prevText: "上一頁",
+        nextText: "下一頁",
+        cssStyle: 'light-theme', // 使用預設主題
+        onPageClick: function(pageNumber) {
+            const showFrom = itemsPerPage * (pageNumber - 1);
+            const showTo = showFrom + itemsPerPage;
+            $rows.hide()
+                .slice(showFrom, showTo)
+                .show();
+        }
+    });
+
+    // 添加頁面資訊
+    const totalPages = Math.ceil(numItems / itemsPerPage);
+    $('#pagination-container').append(
+        `<div class="pagination-info mt-2 text-center">
+            共 ${numItems} 筆資料，${totalPages} 頁
+        </div>`
+    );
 }
 
 // 獲取每頁顯示數量
-function getPerPage() {
-    if (window.innerWidth < 767) return 6;
-    if (window.innerWidth < 992) return 8;
-    return 10;
-}
-
-// 監聽視窗大小變化
-$(window).resize(function () {
-    initializePagination();
-});
+//function getPerPage() {
+//    if (window.innerWidth < 767) return 6;
+//    if (window.innerWidth < 992) return 8;
+//    return 10;
+//}
+//
+//// 監聽視窗大小變化
+//$(window).resize(function () {
+//    initializePagination();
+//});
 
 // 初始化排序功能
 function initializeSorting() {

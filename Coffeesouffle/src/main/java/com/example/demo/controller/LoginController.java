@@ -23,23 +23,38 @@ public class LoginController {
     @ResponseBody
     public ResponseEntity<?> login(@RequestBody Map<String, String> map, HttpSession session) {
         try {
-            System.out.println("Logging attempt - Account: " + map.get("account"));
+            String account = map.get("account");
+            String password = map.get("password");
             
-            Member member = memberService.login(map.get("account"), map.get("password"));
-            System.out.println("After login attempt - Member object: " + member);
+            System.out.println("Login attempt - Account: " + account + ", Password: " + password);
+            
+            // 1. 先查找會員
+            Member member = memberService.findMemberByAccount(account);
+            System.out.println("Found member: " + member);
             
             if (member == null) {
-                System.out.println("Login failed - Member is null");
+                System.out.println("Member not found");
                 return ResponseEntity.status(401).body("帳號或密碼錯誤");
             }
             
-            System.out.println("Member found - IsMember value: " + member.getIsMember());
-            // 檢查是否為員工
-            if (member.getIsMember() == null || member.getIsMember() != 1) {
-                System.out.println("Access denied - Not an employee");
-                return ResponseEntity.status(403).body("您沒有權限訪問後台系統");
+            System.out.println("Stored password: " + member.getPassword());
+            System.out.println("Stored salt: " + member.getSalt());
+            
+            // 2. 驗證密碼
+            boolean passwordMatch = memberService.verifyPassword(password, member.getPassword(), member.getSalt());
+            System.out.println("Password match: " + passwordMatch);
+            
+            if (!passwordMatch) {
+                System.out.println("Password verification failed");
+                return ResponseEntity.status(401).body("帳號或密碼錯誤");
             }
             
+            // 3. 檢查是否為員工
+            if (member.getIsMember() != 1) {
+                System.out.println("Not an employee");
+                return ResponseEntity.status(403).body("您沒有權限訪問後台系統");
+            }
+
             session.setAttribute("loginStatus", true);
             session.setAttribute("member", member);
 
@@ -48,7 +63,6 @@ public class LoginController {
             return ResponseEntity.ok(result);
             
         } catch (Exception e) {
-            System.err.println("Login error occurred: " + e.getMessage());
             e.printStackTrace();
             return ResponseEntity.status(500).body("伺服器錯誤：" + e.getMessage());
         }

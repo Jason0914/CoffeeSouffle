@@ -63,35 +63,37 @@ $(document).ready(function () {
         });
     });
 
-    // 分頁設置
-    function getPerPage() {
-        if (window.innerWidth < 767) {
-            return 6;
-        } else if (window.innerWidth < 992) {
-            return 8;
-        } else {
-            return 10;
-        }
-    }
-
-    // 初始化分頁
+    // 初始化分頁功能
     function initializePagination() {
-        var perPage = getPerPage();
-        var numItems = $(".list-item").length;
+        const itemsPerPage = 10; // 固定每頁顯示10筆
+        const $rows = $(".list-item");
+        const numItems = $rows.length;
 
-        $(".list-item").slice(perPage).hide();
+        $rows.hide();
+        $rows.slice(0, itemsPerPage).show();
 
-        $("#pagination-container").pagination({
+        $('#pagination-container').pagination({
             items: numItems,
-            itemsOnPage: perPage,
-            prevText: "&laquo",
-            nextText: "&raquo",
-            onPageClick: function (pageNumber) {
-                var from = perPage * (pageNumber - 1);
-                var to = from + perPage;
-                $(".list-item").hide().slice(from, to).show();
-            },
+            itemsOnPage: itemsPerPage,
+            prevText: "上一頁",
+            nextText: "下一頁",
+            cssStyle: 'light-theme',
+            onPageClick: function(pageNumber) {
+                const showFrom = itemsPerPage * (pageNumber - 1);
+                const showTo = showFrom + itemsPerPage;
+                $rows.hide()
+                    .slice(showFrom, showTo)
+                    .show();
+            }
         });
+
+        // 添加分頁資訊
+        const totalPages = Math.ceil(numItems / itemsPerPage);
+        $('#pagination-container').append(
+            `<div class="pagination-info">
+                共 ${numItems} 筆資料，${totalPages} 頁
+            </div>`
+        );
     }
 
     initializePagination();
